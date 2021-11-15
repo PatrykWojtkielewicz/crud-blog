@@ -15,3 +15,6 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/',[HomeController::class,'index'])->name('start');
+Route::get('/new_post',[HomeController::class,'new_post'])->name('new_post');
+
+Route::post('/add_post/', [HomeController::class,'add_post'])->name('add_post');
