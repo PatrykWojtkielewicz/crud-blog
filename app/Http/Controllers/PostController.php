@@ -40,7 +40,17 @@ class PostController extends Controller
         $data=array();
         $data['title']=$request->post_title;
         $data['description']=$request->post_content;
-        $data['image']="abc";
+
+        $request->validate([
+            'post_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+    
+        $imageName = time().'.'.$request->post_image->extension();  
+     
+        $request->post_image->move(public_path('images'), $imageName);
+  
+
+        $data['image']=$imageName;
         $data['slug']=Str::slug($request->post_title);
         $data['user_id']=session()->get('UserId');
         $data['active']=0;

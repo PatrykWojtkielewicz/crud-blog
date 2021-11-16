@@ -24,7 +24,7 @@
                         $user_name = DB::table('users')->where('id', '=', $user_id)->value('name');
                         echo("Witaj, ".$user_name);
                     ?>
-                    <a href="{{ route('login.logout') }}" class="no-underline hover:underline p-4" >Wyloguj</a>
+                    <a href="{{ route('login.logout') }}" class="no-underline hover:underline p-4">Wyloguj</a>
                 @endif
             </p>
         </div>
