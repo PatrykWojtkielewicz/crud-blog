@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\post;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class HomeController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $dane=post::all();
-        return view('posts', compact('dane'));
+        //
     }
 
     /**
@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+        return view('new_post');
     }
 
     /**
@@ -37,7 +37,18 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=array();
+        $data['title']=$request->post_title;
+        $data['description']=$request->post_content;
+        $data['image']="abc";
+        $data['slug']=Str::slug($request->post_title);
+        $data['user_id']=session()->get('UserId');
+        $data['active']=0;
+        $data['created_at']=Carbon::now();
+        $data['updated_at']=Carbon::now();
+        DB::table('posts')->insert($data);
+
+        return Redirect('/');
     }
 
     /**

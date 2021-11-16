@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +18,14 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/',[HomeController::class,'index'])->name('start');
-Route::get('/new_post',[HomeController::class,'new_post'])->name('new_post');
 
-Route::post('/add_post/', [HomeController::class,'add_post'])->name('add_post');
+Route::get('/new_post',[PostController::class,'create'])->name('new_post');
+Route::post('/add_post', [PostController::class,'store'])->name('add_post');
+
+Route::get('/login/create', [LoginController::class, 'create'])->name('login.create');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+Route::get('/logout', [LoginController::class, 'logout'])->name('login.logout');
+
+Route::get('/registration/create', [RegisterController::class, 'create'])->name('registration.create');
+Route::post('/registration', [RegisterController::class, 'store'])->name('registration.store');
+

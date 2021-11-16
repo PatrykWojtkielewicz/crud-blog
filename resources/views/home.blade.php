@@ -15,13 +15,20 @@
                 <a href="{{ route('new_post') }}" class="no-underline hover:underline p-4" >Nowy post</a>
             </p>
             <p class="text-right">
-                <a href="{{ route('login') }}" class="no-underline hover:underline p-4" >Zaloguj</a>
+                @if(empty(session()->get('UserId')))
+                    <a href="{{ route('login.create') }}" class="no-underline hover:underline p-4" >Zaloguj</a>
+                    <a href="{{ route('registration.create') }}" class="no-underline hover:underline p-4" >Zarejestruj</a>
+                @else
+                    <?php
+                        $user_id = session()->get('UserId');
+                        $user_name = DB::table('users')->where('id', '=', $user_id)->value('name');
+                        echo("Witaj, ".$user_name);
+                    ?>
+                    <a href="{{ route('login.logout') }}" class="no-underline hover:underline p-4" >Wyloguj</a>
+                @endif
             </p>
         </div>
     </nav>
-    <nav id="content" class="w-full container mx-auto z-30 top-0">
-        @yield('content')
-    </nav>
-    
+    @yield('content')  
 </body>
 </html>

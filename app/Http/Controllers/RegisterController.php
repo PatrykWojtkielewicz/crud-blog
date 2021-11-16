@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\post;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use Carbon\Carbon;
 
-class HomeController extends Controller
+class RegisterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $dane=post::all();
-        return view('posts', compact('dane'));
+        //
     }
 
     /**
@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+        return view('auth.registration');
     }
 
     /**
@@ -37,7 +37,32 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(isset($request->submit)){
+            $name = $request->user_name;
+            $email = $request->user_email;
+            $password = $request->user_password;
+            $password = password_hash($password, PASSWORD_DEFAULT);
+
+            //$user = users::where('name', '=', $name)->first();
+            $user = DB::table('users')->where('name', '=', $name)->first();
+            if($user !== null){
+                echo("Nazwa użytkownika nie jest dostępna");
+            }
+
+            $user_email = DB::table('users')->where('email', '=', $email)->first();
+            if($user_email !== null){
+                echo("<br/>Email nie jest dostępny");
+            }
+
+            if($user === null && $user_email === null){
+                $data = array('name'=>$name, 'email'=>$email, 'password'=>$password, 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now());
+                DB::table('users')->insert($data);
+                return Redirect('/');
+            }
+        }
+        else{
+            echo("Strona niedostępna");
+        }
     }
 
     /**

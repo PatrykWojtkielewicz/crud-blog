@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\post;
 use Illuminate\Support\Facades\DB;
 
-class HomeController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $dane=post::all();
-        return view('posts', compact('dane'));
+        //
     }
 
     /**
@@ -26,7 +24,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+        return view('auth.login');
     }
 
     /**
@@ -37,7 +35,34 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(isset($request->submit)){
+            $name = $request->user_name;
+            $password = $request->user_password;
+            
+            $user = DB::table('users')->where('name', '=', $name)->first();
+            if($user === null){
+                echo("Nie ma takiego użytkownika");
+            }
+            else{
+                $hashed_pass = DB::table('users')->where('name', '=', $name)->value('password');
+                if(password_verify($password, $hashed_pass)){
+                    $user_id = DB::table('users')->where('name', '=', $name)->value('id');
+                    session()->put('UserId', $user_id);
+                    return Redirect('/');
+                }
+                else{
+                    echo("Nie poprawne hasło");
+                }
+            }
+        }
+        else{
+            echo("Strona niedostępna");
+        }
+    }
+
+    public function logout(){
+        session()->forget('UserId');
+        return Redirect('/');
     }
 
     /**
