@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\AddPostRequest;
+use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 class PostController extends Controller
 {
@@ -32,32 +36,20 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\AddPostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddPostRequest $request)
     {
-        $data=array();
-        $data['title']=$request->post_title;
-        $data['description']=$request->post_content;
-
-        $request->validate([
-            'post_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        $path = Storage::disk('public')->put('photos', new File($request['post_image']), 'public');
+        Post::create([
+            'title' => $request['post_title'],
+            'description' => $request['post_content'],
+            'image' => $path,
+            'slug' => Str::slug($request['post_title']),
+            'user_id' => session()->get('UserId'),
+            'active' => 0,
         ]);
-    
-        $imageName = time().'.'.$request->post_image->extension();  
-     
-        $request->post_image->move(public_path('images'), $imageName);
-  
-
-        $data['image']=$imageName;
-        $data['slug']=Str::slug($request->post_title);
-        $data['user_id']=session()->get('UserId');
-        $data['active']=0;
-        $data['created_at']=Carbon::now();
-        $data['updated_at']=Carbon::now();
-        DB::table('posts')->insert($data);
-
         return Redirect('/');
     }
 

@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->longtext('description');
             $table->string('image')->nullable();
             $table->string('slug'); // formats title
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained();
             $table->boolean('active');
             $table->timestamps();
         });

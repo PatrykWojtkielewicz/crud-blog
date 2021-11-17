@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\RegisterRequest;
 
 class RegisterController extends Controller
 {
@@ -32,37 +34,18 @@ class RegisterController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\RegisterRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        if(isset($request->submit)){
-            $name = $request->user_name;
-            $email = $request->user_email;
-            $password = $request->user_password;
-            $password = password_hash($password, PASSWORD_DEFAULT);
-
-            //$user = users::where('name', '=', $name)->first();
-            $user = DB::table('users')->where('name', '=', $name)->first();
-            if($user !== null){
-                echo("Nazwa użytkownika nie jest dostępna");
-            }
-
-            $user_email = DB::table('users')->where('email', '=', $email)->first();
-            if($user_email !== null){
-                echo("<br/>Email nie jest dostępny");
-            }
-
-            if($user === null && $user_email === null){
-                $data = array('name'=>$name, 'email'=>$email, 'password'=>$password, 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now());
-                DB::table('users')->insert($data);
-                return Redirect('/');
-            }
-        }
-        else{
-            echo("Strona niedostępna");
-        }
+        User::create([
+            'name' => $request['user_name'],
+            'email' => $request['user_email'],
+            'password' => Hash::make($request['user_password']),
+            'permission_id' => 2,
+        ]);
+        return Redirect('/');
     }
 
     /**

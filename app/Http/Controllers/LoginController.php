@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Post;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\LoginRequest;
 
 class LoginController extends Controller
 {
@@ -30,11 +34,16 @@ class LoginController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\LoginRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
+        $name = $request['user_name'];
+        $password = $request['user_password'];
+        $user = User::where('name', '=', $name)->firstOrFail();
+        print_r($user['email']);
+        /*
         if(isset($request->submit)){
             $name = $request->user_name;
             $password = $request->user_password;
@@ -45,9 +54,12 @@ class LoginController extends Controller
             }
             else{
                 $hashed_pass = DB::table('users')->where('name', '=', $name)->value('password');
-                if(password_verify($password, $hashed_pass)){
+                if(Hash::check($password, $hashed_pass)){
                     $user_id = DB::table('users')->where('name', '=', $name)->value('id');
                     session()->put('UserId', $user_id);
+                    $user_permission = DB::table('users')->where('name', '=', $name)->value('permission_id');
+                    session()->put('UserPermission', $user_permission);
+                    //echo($this->belongsTo(Post::class, '1'));
                     return Redirect('/');
                 }
                 else{
@@ -58,6 +70,7 @@ class LoginController extends Controller
         else{
             echo("Strona niedostępna");
         }
+        */
     }
 
     public function logout(){

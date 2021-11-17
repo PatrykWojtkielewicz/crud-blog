@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\post;
+use App\Models\user;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -15,8 +16,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $dane=post::all();
-        return view('posts', compact('dane'));
+        $posts = post::all();
+        $users = user::all();
+        return view('posts', compact('posts', 'users'));
     }
 
     /**

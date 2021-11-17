@@ -12,7 +12,9 @@
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
             <p class="text-left">
                 <a href="{{ route('start') }}" class="no-underline hover:underline p-4" >Strona Główna</a>
-                <a href="{{ route('new_post') }}" class="no-underline hover:underline p-4" >Nowy post</a>
+                @if(session()->get('UserPermission') == "1" && !empty(session()->get('UserId')))
+                    <a href="{{ route('new_post') }}" class="no-underline hover:underline p-4" >Nowy post</a>
+                @endif
             </p>
             <p class="text-right">
                 @if(empty(session()->get('UserId')))
