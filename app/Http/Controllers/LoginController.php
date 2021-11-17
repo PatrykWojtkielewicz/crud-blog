@@ -34,16 +34,21 @@ class LoginController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\LoginRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LoginRequest $request)
+    public function store(Request $request)
     {
+        // Remember to add LoginRequeste here ^
+
+        /*
+
         $name = $request['user_name'];
         $password = $request['user_password'];
         $user = User::where('name', '=', $name)->firstOrFail();
         print_r($user['email']);
-        /*
+        */
+        
         if(isset($request->submit)){
             $name = $request->user_name;
             $password = $request->user_password;
@@ -70,7 +75,7 @@ class LoginController extends Controller
         else{
             echo("Strona niedostępna");
         }
-        */
+        
     }
 
     public function logout(){
