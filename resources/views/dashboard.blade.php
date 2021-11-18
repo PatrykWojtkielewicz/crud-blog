@@ -7,16 +7,16 @@
                 <div class="sticky top-0 p-4 w-full h-full">
                     <ul class="list-disc">
                         <li>
-                            <a href="" class="no-underline hover:underline p-2">Przeglądaj użytkowników</a>
+                            <a href="{{ route('dashboard/users') }}" class="no-underline hover:underline p-2">Przeglądaj użytkowników</a>
                         </li>
                         <li>
-                            <a href="" class="no-underline hover:underline p-2">Przeglądaj posty</a>
+                            <a href="{{ route('dashboard/posts') }}" class="no-underline hover:underline p-2">Przeglądaj posty</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="w-full w-2/3 flex-grow pt-1 px-3">
-                
+                @yield('dashboard_content')
             </div>
         </div>
     </div>

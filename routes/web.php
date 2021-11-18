@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\DashBoardUsersController;
+use App\Http\Controllers\DashBoardPostsController;
 use App\Http\Controllers\PostController;
 
 /*
@@ -19,6 +21,8 @@ use App\Http\Controllers\PostController;
 Route::get('/',[HomeController::class,'index'])->name('start');
 
 Route::get('/dashboard',[DashBoardController::class,'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard/users',[DashBoardUsersController::class,'index'])->middleware(['auth'])->name('dashboard/users');
+Route::get('/dashboard/posts',[DashBoardPostsController::class,'index'])->middleware(['auth'])->name('dashboard/posts');
 Route::get('/new_post',[PostController::class,'create'])->middleware(['auth'])->name('new_post');
 Route::post('/add_post',[PostController::class,'store'])->middleware(['auth'])->name('add_post');
 

@@ -15,7 +15,7 @@
             </p>
             <p class="text-right">
                 @auth
-                    <a href="{{ url('/dashboard') }}" class="no-underline hover:underline p-4">Panel Użytkownika</a>
+                    <a href="{{ route('dashboard') }}" class="no-underline hover:underline p-4">Panel Użytkownika</a>
                     <a href="{{ url('/logout') }}" class="no-underline hover:underline p-4">Wyloguj</a>
                 @else
                     <a href="{{ route('login') }}" class="no-underline hover:underline p-4">Zaloguj</a>
