@@ -7,6 +7,9 @@
                 <div class="sticky top-0 p-4 w-full h-full">
                     <ul class="list-disc">
                         <li>
+                            <a href="{{ route('new_post') }}" class="no-underline hover:underline p-2">Dodaj Post</a>
+                        </li>
+                        <li>
                             <a href="{{ route('dashboard/users') }}" class="no-underline hover:underline p-2">Przeglądaj użytkowników</a>
                         </li>
                         <li>
