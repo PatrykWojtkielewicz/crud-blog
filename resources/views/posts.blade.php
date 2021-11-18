@@ -12,7 +12,7 @@
                 <div class="w-full py-4 px-6 md:w-2/3 text-gray-800 flex flex-col justify-between">
                   <a class="font-semibold text-lg leading-tight truncate no-underline hover:underline" href="">{{ $post->title}}</a>
                   <p class="mt-2">
-                    {{ implode(' ', array_slice(explode(' ', $post->description), 0, 80))."..." }}
+                    {{ str_replace(["&nbsp;","&lt;"], "",strip_tags(implode(' ', array_slice(explode(' ', $post->description), 0, 80))."...")) }}
                   </p>
                   <p class="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2">
                       <p class="text-gray-900 leading-none text-right">
