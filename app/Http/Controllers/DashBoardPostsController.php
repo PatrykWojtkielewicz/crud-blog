@@ -105,6 +105,7 @@ class DashBoardPostsController extends Controller
                 break;
             case 'delete':
                 $this->destroy($post_id);
+                return Redirect('dashboard/posts');
                 break;
         }
     }
@@ -118,6 +119,5 @@ class DashBoardPostsController extends Controller
     public function destroy($id)
     {
         Post::destroy($id);
-        return Redirect('dashboard/posts');
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container m-auto">
         <div class="w-full flex flex-col sm:flex-row flex-wrap sm:flex-nowrap py-4 flex-grow">
-            <div class="w-1/4 flex-shrink flex-grow-0 px-4">
+            <div class="w-1/4 px-4">
                 <div class="sticky top-0 p-4 w-full h-full">
                     <ul class="list-disc">
                         <li>
@@ -21,7 +21,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="w-full flex-grow pt-1 px-3">
+            <div class="w-full pt-1 px-3">
                 @yield('dashboard_content')
             </div>
         </div>
