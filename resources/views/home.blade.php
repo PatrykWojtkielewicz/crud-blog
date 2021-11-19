@@ -15,8 +15,11 @@
             </p>
             <p class="text-right">
                 @auth
-                    <a href="{{ route('dashboard') }}" class="no-underline hover:underline p-4">Panel Użytkownika</a>
-                    <a href="{{ url('/logout') }}" class="no-underline hover:underline p-4">Wyloguj</a>
+                    @if(Auth::user()->permission_id == 1)
+                        <a href="{{ route('dashboard') }}" class="no-underline hover:underline p-4">Panel administratora</a>
+                    @endif
+                        <a href="{{ route('settings') }}" class="no-underline hover:underline p-4">Ustawienia</a>
+                        <a href="{{ url('/logout') }}" class="no-underline hover:underline p-4">Wyloguj</a>
                 @else
                     <a href="{{ route('login') }}" class="no-underline hover:underline p-4">Zaloguj</a>
                     @if (Route::has('register'))

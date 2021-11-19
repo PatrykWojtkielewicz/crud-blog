@@ -6,6 +6,7 @@ use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\DashBoardUsersController;
 use App\Http\Controllers\DashBoardPostsController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,14 @@ use App\Http\Controllers\PostController;
 Route::get('/',[HomeController::class,'index'])->name('start');
 
 Route::get('/dashboard',[DashBoardController::class,'index'])->middleware(['auth'])->name('dashboard');
+
 Route::get('/dashboard/users',[DashBoardUsersController::class,'index'])->middleware(['auth'])->name('dashboard/users');
+Route::get('/dashboard/choose_user',[DashBoardUsersController::class,'create'])->middleware(['auth'])->name('dashboard/users/choose_user');
+Route::post('/dashboard/update_user',[DashBoardUsersController::class,'update'])->middleware(['auth'])->name('dashboard/users/update_user');
+Route::post('/dashboard/show_user',[DashBoardUsersController::class,'show'])->middleware(['auth'])->name('dashboard/users/show_user');
 Route::get('/dashboard/posts',[DashBoardPostsController::class,'index'])->middleware(['auth'])->name('dashboard/posts');
+
+Route::get('/settings',[SettingsController::class,'index'])->middleware(['auth'])->name('settings');
 Route::get('/new_post',[PostController::class,'create'])->middleware(['auth'])->name('new_post');
 Route::post('/add_post',[PostController::class,'store'])->middleware(['auth'])->name('add_post');
 

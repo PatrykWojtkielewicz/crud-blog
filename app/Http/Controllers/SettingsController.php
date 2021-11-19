@@ -3,13 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Illuminate\Http\File;
-use App\Models\Post;
-use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
+class SettingsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,12 +23,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->permission_id == 1){
-            return view('new_post');
-        }
-        else{
-            return Redirect('/');
-        }
+        //
     }
 
     /**
@@ -44,16 +34,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $path = Storage::disk('public')->put('photos', new File($request['post_image']), 'public');
-        Post::create([
-            'title' => $request['post_title'],
-            'description' => $request['post_content'],
-            'image' => $path,
-            'slug' => Str::slug($request['post_title']),
-            'user_id' => Auth::id(),
-            'active' => 1,
-        ]);
-        return Redirect('/');
+        //
     }
 
     /**

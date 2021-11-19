@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashBoardController extends Controller
 {
@@ -13,7 +14,12 @@ class DashBoardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        if(Auth::user()->permission_id == 1){
+            return view('dashboard');
+        }
+        else{
+            return Redirect('/');
+        }
     }
 
     /**

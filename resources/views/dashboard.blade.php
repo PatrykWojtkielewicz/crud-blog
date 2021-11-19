@@ -13,6 +13,9 @@
                             <a href="{{ route('dashboard/users') }}" class="no-underline hover:underline p-2">Przeglądaj użytkowników</a>
                         </li>
                         <li>
+                            <a href="{{ route('dashboard/users/choose_user') }}" class="no-underline hover:underline p-2">Edytuj użytkownika</a>
+                        </li>
+                        <li>
                             <a href="{{ route('dashboard/posts') }}" class="no-underline hover:underline p-2">Przeglądaj posty</a>
                         </li>
                     </ul>

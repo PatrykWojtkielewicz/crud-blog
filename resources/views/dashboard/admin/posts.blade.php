@@ -8,7 +8,6 @@
                 <tr class="border-black border-b-2">
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Zdjęcie</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tytuł</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Zawartość</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Autor</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data Stworzenia</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data modyfikacji</th>
@@ -19,8 +18,7 @@
                 @foreach($posts as $post)
                     <tr class="border-b-2">
                         <td class="px-6 py-4 whitespace-nowrap"><img class="inset-0 h-full w-full object-cover object-center" src="{{ asset('storage/'.$post->image) }}" /></td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $post->title }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ str_replace(["&nbsp;","&lt;"], "",strip_tags(implode(' ', array_slice(explode(' ', $post->description), 0, 6))."...")) }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ substr($post->title, 0, 24)."..." }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             @foreach($users as $user)
                                 @if($user->id == $post->user_id)
