@@ -81,11 +81,14 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        foreach($request->delete as $id){
+            Comment::destroy($id);
+        }
+        return Redirect()->route('post.show', ['post' => $request->slug]);
     }
 }

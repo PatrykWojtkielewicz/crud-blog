@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Permission;
+use Illuminate\Support\Facades\Auth;
 
 class DisplayPostController extends Controller
 {
@@ -20,7 +22,13 @@ class DisplayPostController extends Controller
         $author = User::where('id', '=', $post->user_id)->value('name');
         $users = User::all();
         $comments = Comment::where('post_id', '=', $post->id)->get();
-        return view('display_post', compact('post','author','comments','users'));
+        if(Auth::check()){
+            $permission = Permission::where('id', '=', Auth::user()->permission_id)->value('name');
+        }
+        else{
+            $permission = 'user';
+        }
+        return view('display_post', compact('post','author','comments','users','permission'));
     }
 
     /**
