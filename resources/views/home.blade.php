@@ -20,7 +20,7 @@
         });
     </script>
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
     <nav id="header" class="w-full z-30 top-0 bg-gray-800 text-white p-4">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
             <p class="text-left">
@@ -42,7 +42,9 @@
             </p>
         </div>
     </nav>
-    @yield('content')
+    <div class="flex-auto">
+        @yield('content')
+    </div>
     <footer id="footer" class="w-full z-30 top-0 bg-gray-800 text-white text-center p-6">
         <p class="inline text-center">Blog &copy2021</p>
     </footer>

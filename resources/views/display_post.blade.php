@@ -20,7 +20,7 @@
                 <p class="text-right">{{ $date }}</p>
                 <!-- Comment section -->
                 <div class="container p-4 mt-8 bg-gray-100 rounded-t-3xl">
-                    <p class="text-xl text-center bg-gray-200 p-4 ">
+                    <p class="text-xl text-center rounded-t-3xl bg-gray-200 p-4 shadow-lg">
                         Komentarze
                         @if(!Auth::check())
                             (<a href="{{ route('login') }}" class="underline">Zaloguj się</a> aby dodać komentarz)
@@ -34,8 +34,8 @@
                         <form action="{{ route('comment.add') }}" method="post" class="pt-4">
                             @csrf
                             <div class="flex">
-                                <input type="text" name="content" placeholder="Twój komentarz" class="w-5/6 inline rounded-l-full"/>
-                                <input type="submit" name="submit" value="Dodaj komentarz" class="w-1/6 inline rounded-r-full hover:bg-gray-300"/>
+                                <input type="text" name="content" placeholder="Twój komentarz" class="w-5/6 inline rounded-l-full shadow-lg"/>
+                                <input type="submit" name="submit" value="Dodaj komentarz" class="w-1/6 inline rounded-r-full hover:bg-gray-300 shadow-lg"/>
                                 <input type="hidden" class="hidden" name="post_id" value="{{ $post->id }}"/>
                                 <input type="hidden" class="hidden" name="author_id" value="{{ Auth::id() }}"/>
                                 <input type="hidden" class="hidden" name="slug" value="{{ $post->slug }}"/>
@@ -75,7 +75,7 @@
                     @endforeach
                 </div>
                 @if($permission == 'admin')
-                    <input class="float-right p-4 mt-8 rounded-tl-xl hover:bg-gray-300" type="submit" name="submit" value="Usuń wybrany komentarz"/>
+                    <input class="float-right p-4 mt-8 rounded-tl-xl shadow-lg hover:bg-gray-300" type="submit" name="submit" value="Usuń wybrany komentarz"/>
                     <input type="hidden" class="hidden" name="slug" value="{{ $post->slug }}"/>
                 </form>
                 @endif
