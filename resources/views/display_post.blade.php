@@ -75,7 +75,7 @@
                     @endforeach
                 </div>
                 @if($permission == 'admin')
-                    <input class="float-right p-4 my-8 rounded-l-full hover:bg-gray-300" type="submit" name="submit" value="Usuń wybrany komentarz"/>
+                    <input class="float-right p-4 mt-8 rounded-tl-xl hover:bg-gray-300" type="submit" name="submit" value="Usuń wybrany komentarz"/>
                     <input type="hidden" class="hidden" name="slug" value="{{ $post->slug }}"/>
                 </form>
                 @endif
