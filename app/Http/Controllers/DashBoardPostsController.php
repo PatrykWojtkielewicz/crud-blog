@@ -64,7 +64,12 @@ class DashBoardPostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request){
-        $path = Storage::disk('public')->put('photos', new File($request['post_image']), 'public');
+        if(!empty($request['post_image'])){
+            $path = Storage::disk('public')->put('photos', new File($request['post_image']), 'public');
+        }
+        else{
+            $path = "";
+        }
         Post::where('id', '=', $request->post_id)->update([
             'title' => $request['post_title'],
             'description' => $request['post_content'],

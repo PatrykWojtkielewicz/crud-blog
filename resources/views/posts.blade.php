@@ -7,10 +7,12 @@
                 <div id="cards">
                     <div class="container w-100 lg:w-4/5 mx-auto flex flex-col">
                         <div v-for="card in cards" class="flex flex-col md:flex-row overflow-hidden bg-white rounded-lg shadow-xl mt-4 w-100 mx-2">
-                            <div class="h-64 w-auto md:w-1/3">
-                              <img class="inset-0 h-full w-full object-cover object-center" src="{{ asset('storage/'.$post->image) }}" />
-                            </div>
-                            <div class="w-full py-4 px-6 md:w-2/3 text-gray-800 flex flex-col justify-between">
+                            @if(!empty($post->image))
+                              <div class="h-64 w-auto md:w-1/3">
+                                <img class="inset-0 h-full w-full object-cover object-center" src="{{ asset('storage/'.$post->image) }}" />
+                              </div>
+                            @endif
+                            <div class="w-full py-4 px-6 md:w-full text-gray-800 flex flex-col justify-between">
                                 <a class="font-semibold text-lg leading-tight truncate no-underline hover:underline" href="">{{ $post->title}}</a>
                                 <p class="mt-2">
                                   {{ str_replace(["&nbsp;","&lt;"], "",strip_tags(implode(' ', array_slice(explode(' ', $post->description), 0, 80))."...")) }}

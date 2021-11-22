@@ -44,7 +44,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $path = Storage::disk('public')->put('photos', new File($request['post_image']), 'public');
+        if(!empty($request['post_image'])){
+            $path = Storage::disk('public')->put('photos', new File($request['post_image']), 'public');
+        }
+        else{
+            $path = "";
+        }
         Post::create([
             'title' => $request['post_title'],
             'description' => $request['post_content'],
