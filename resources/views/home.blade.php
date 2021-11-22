@@ -6,6 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- TinyMCE -->
+    <script src="https://cdn.tiny.cloud/1/pqh1agigvkv547khuf7xyehg024sk75vqh0i7zixj59yqc5e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#post_content',
+            menu:{
+                file: {title: 'File', items: 'newdocument'},
+                edit: {title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall'},
+                insert: {title: 'Insert', items: 'image link media template codesample'},
+                format: {title: 'Format', items: 'bold italic underline'},
+            },
+        });
+    </script>
 </head>
 <body>
     <nav id="header" class="w-full z-30 top-0 bg-gray-800 text-white p-4">
@@ -29,6 +42,9 @@
             </p>
         </div>
     </nav>
-    @yield('content')  
+    @yield('content')
+    <footer id="footer" class="w-full z-30 top-0 bg-gray-800 text-white text-center p-6">
+        <p class="inline text-center">Blog &copy2021</p>
+    </footer>
 </body>
 </html>

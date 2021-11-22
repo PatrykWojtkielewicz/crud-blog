@@ -1,20 +1,6 @@
 @extends('dashboard')
 
 @section('dashboard_content')
-    <!-- TinyMCE -->
-    <script src="https://cdn.tiny.cloud/1/pqh1agigvkv547khuf7xyehg024sk75vqh0i7zixj59yqc5e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: '#post_content',
-            menu:{
-                file: {title: 'File', items: 'newdocument'},
-                edit: {title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall'},
-                insert: {title: 'Insert', items: 'image link media template codesample'},
-                format: {title: 'Format', items: 'bold italic underline'},
-            },
-            content_style: "body {font-size: 24pt;}",
-        });
-    </script>
     <div class="container m-auto"> 
         <form action="{{ route('dashboard/posts/edit') }}" method="POST" enctype="multipart/form-data">
             @csrf

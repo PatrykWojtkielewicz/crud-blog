@@ -2,13 +2,15 @@
 
 @section('content')
     <div class="container m-auto">
-        <div class="container mx-auto flex flex-wrap py-6 flex justify-center items-center">
+        <div class="container mx-auto flex flex-wrap flex justify-center items-center">
             <div class="w-3/5">
                 <!-- Shows post content -->
                 @if(!empty($post->image))
-                    <img class="mx-auto p-4 w-full" src="{{ asset('storage/'.$post->image) }}"/>
+                    <img class="mx-auto w-full" src="{{ asset('storage/'.$post->image) }}"/>
                 @endif
-                <h2 class="text-6xl p-4 text-center">{{ $post->title }}</h2>
+                <div class="bg-gray-800 p-4 mb-6 h-full w-full text-white rounded-b-3xl">
+                    <h2 class="text-3xl px-4 text-center">{{ $post->title }}</h2>
+                </div>
                 <p class="text-xl">@php echo ($post->description); @endphp</p>
                 <p class="text-right">{{ $author }}</p>
                 @php
@@ -17,8 +19,8 @@
                 @endphp
                 <p class="text-right">{{ $date }}</p>
                 <!-- Comment section -->
-                <div class="container p-4">
-                    <p class="text-xl text-center bg-gray-200 p-6 rounded-full">
+                <div class="container p-4 mt-8 bg-gray-100 rounded-t-3xl">
+                    <p class="text-xl text-center bg-gray-200 p-4 ">
                         Komentarze
                         @if(!Auth::check())
                             (<a href="{{ route('login') }}" class="underline">Zaloguj się</a> aby dodać komentarz)
@@ -33,7 +35,7 @@
                             @csrf
                             <div class="flex">
                                 <input type="text" name="content" placeholder="Twój komentarz" class="w-5/6 inline rounded-l-full"/>
-                                <input type="submit" name="submit" value="Dodaj komentarz" class="w-1/6 inline rounded-r-full"/>
+                                <input type="submit" name="submit" value="Dodaj komentarz" class="w-1/6 inline rounded-r-full hover:bg-gray-300"/>
                                 <input type="hidden" class="hidden" name="post_id" value="{{ $post->id }}"/>
                                 <input type="hidden" class="hidden" name="author_id" value="{{ Auth::id() }}"/>
                                 <input type="hidden" class="hidden" name="slug" value="{{ $post->slug }}"/>
@@ -42,8 +44,8 @@
                     @endif
                     <!-- If admin, displays form for deleting comments -->
                     @if($permission == 'admin')
-                        <form action="{{ route('comment.delete') }}" method="POST">
-                            @csrf
+                    <form action="{{ route('comment.delete') }}" method="POST">
+                        @csrf
                     @endif
                     @foreach ($comments->reverse() as $comment)
                         @php
@@ -71,12 +73,12 @@
                         </div>
                         <hr/>
                     @endforeach
-                    @if($permission == 'admin')
-                        <input type="hidden" class="hidden" name="slug" value="{{ $post->slug }}"/>
-                        <input class="float-right p-2 my-2 rounded-full" type="submit" name="submit" value="Usuń komentarz"/>
-                        </form>
-                    @endif
                 </div>
+                @if($permission == 'admin')
+                    <input class="float-right p-4 my-8 rounded-l-full hover:bg-gray-300" type="submit" name="submit" value="Usuń wybrany komentarz"/>
+                    <input type="hidden" class="hidden" name="slug" value="{{ $post->slug }}"/>
+                </form>
+                @endif
             </div>
         </div>
     </div>
