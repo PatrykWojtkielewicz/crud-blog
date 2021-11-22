@@ -23,6 +23,7 @@ use App\Http\Controllers\CommentController;
 
 Route::get('/',[HomeController::class,'index'])->name('start');
 Route::get('/post/{post}',[DisplayPostController::class, 'index'])->name('post.show');
+Route::get('/post/{post}#comments',[DisplayPostController::class, 'index'])->name('post.show.comment');
 Route::post('/comment/add',[CommentController::class, 'store'])->middleware(['auth'])->name('comment.add');
 Route::post('/comment/delete',[CommentController::class, 'destroy'])->middleware(['auth'])->name('comment.delete');
 

@@ -17,6 +17,12 @@
                 insert: {title: 'Insert', items: 'image link media template codesample'},
                 format: {title: 'Format', items: 'bold italic underline'},
             },
+            setup:function(ed)
+            {
+                ed.on('change', function(e) {
+                    this.execCommand("fontSize", false, "24px");
+                });
+            },
         });
     </script>
 </head>

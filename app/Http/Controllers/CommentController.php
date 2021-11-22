@@ -41,7 +41,7 @@ class CommentController extends Controller
             'post_id' => $request['post_id'],
             'content' => $request['content'],
         ]);
-        return Redirect()->route('post.show', ['post' => $request->slug]);
+        return Redirect()->route('post.show.comment', ['post' => $request->slug]);
     }
 
     /**
@@ -89,6 +89,6 @@ class CommentController extends Controller
         foreach($request->delete as $id){
             Comment::destroy($id);
         }
-        return Redirect()->route('post.show', ['post' => $request->slug]);
+        return Redirect()->route('post.show.comment', ['post' => $request->slug]);
     }
 }

@@ -12,14 +12,14 @@
                     <h2 class="text-3xl px-4 text-center">{{ $post->title }}</h2>
                 </div>
                 <p class="text-xl">@php echo ($post->description); @endphp</p>
-                <p class="text-right">{{ $author }}</p>
+                <p class="text-right capitalize">{{ $author }}</p>
                 @php
                     $created_at = $post->created_at;
                     $date = $created_at->year."-".$created_at->month."-".$created_at->day;
                 @endphp
                 <p class="text-right">{{ $date }}</p>
                 <!-- Comment section -->
-                <div class="container p-4 mt-8 bg-gray-100 rounded-t-3xl">
+                <div class="container p-4 mt-8 bg-gray-100 rounded-t-3xl" id="comments">
                     <p class="text-xl text-center rounded-t-3xl bg-gray-200 p-4 shadow-lg">
                         Komentarze
                         @if(!Auth::check())
