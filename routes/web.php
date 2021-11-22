@@ -8,6 +8,7 @@ use App\Http\Controllers\DashBoardPostsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\DisplayPostController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ use App\Http\Controllers\DisplayPostController;
 
 Route::get('/',[HomeController::class,'index'])->name('start');
 Route::get('/post/{post}',[DisplayPostController::class, 'index'])->name('post.show');
+Route::post('/comment/add',[CommentController::class, 'store'])->middleware(['auth'])->name('comment.add');
 
 Route::get('/dashboard',[DashBoardController::class,'index'])->middleware(['auth'])->name('dashboard');
 Route::get('/dashboard/users',[DashBoardUsersController::class,'index'])->middleware(['auth'])->name('dashboard/users');

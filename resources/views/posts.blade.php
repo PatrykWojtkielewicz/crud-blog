@@ -25,10 +25,10 @@
                                         @endif
                                       @endforeach
                                     </p>
-                                    <?php
+                                    @php
                                         $created_at = $post->created_at;
                                         $date = $created_at->year."-".$created_at->month."-".$created_at->day;
-                                    ?>
+                                    @endphp
                                     <p class="text-gray-600 text-right">{{ $date }}</p>
                                 </p>
                             </div>

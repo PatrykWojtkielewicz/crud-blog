@@ -12,6 +12,7 @@
                 insert: {title: 'Insert', items: 'image link media template codesample'},
                 format: {title: 'Format', items: 'bold italic underline'},
             },
+            content_style: "body {font-size: 24pt;}",
         });
     </script>
     <div class="container m-auto">

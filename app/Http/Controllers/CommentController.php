@@ -3,24 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\User;
 use App\Models\Comment;
+use App\Http\Requests\CommentRequest;
 
-class DisplayPostController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($post)
+    public function index()
     {
-        $post = Post::where('slug', '=', $post)->first();
-        $author = User::where('id', '=', $post->user_id)->value('name');
-        $users = User::all();
-        $comments = Comment::where('post_id', '=', $post->id)->get();
-        return view('display_post', compact('post','author','comments','users'));
+        //
     }
 
     /**
@@ -39,9 +34,14 @@ class DisplayPostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        //
+        Comment::create([
+            'user_id' => $request['author_id'],
+            'post_id' => $request['post_id'],
+            'content' => $request['content'],
+        ]);
+        return Redirect()->route('post.show', ['post' => $request->slug]);
     }
 
     /**
