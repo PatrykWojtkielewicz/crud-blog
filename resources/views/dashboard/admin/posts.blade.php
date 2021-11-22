@@ -19,9 +19,17 @@
                 </tr>
                 @foreach($posts as $post)
                     <tr class="border-b-2">
-                        <td class="px-6 py-4 whitespace-nowrap"><img class="inset-0 h-full w-full object-cover object-center" src="{{ asset('storage/'.$post->image) }}" /></td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            @if(!empty($post->image))
+                                <img class="inset-0 h-full w-full object-cover object-center" src="{{ asset('storage/'.$post->image) }}" />
+                            @else
+                                <p>Brak</p>
+                            @endif
+                        </td>
                         <td class="px-6 py-4 whitespace-nowrap">{{ $post->id }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ substr($post->title, 0, 24)."..." }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <a href="{{ route('post.show', ['post' => $post->slug]) }}" class="no-underline hover:underline">{{ substr($post->title, 0, 24)."..." }}</a>
+                        </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             @foreach($users as $user)
                                 @if($user->id == $post->user_id)

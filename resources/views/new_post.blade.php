@@ -5,7 +5,13 @@
     <script src="https://cdn.tiny.cloud/1/pqh1agigvkv547khuf7xyehg024sk75vqh0i7zixj59yqc5e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
-          selector: '#post_content'
+            selector: '#post_content',
+            menu:{
+                file: {title: 'File', items: 'newdocument'},
+                edit: {title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall'},
+                insert: {title: 'Insert', items: 'image link media template codesample'},
+                format: {title: 'Format', items: 'bold italic underline'},
+            },
         });
     </script>
     <div class="container m-auto">

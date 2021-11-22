@@ -7,6 +7,7 @@ use App\Http\Controllers\DashBoardUsersController;
 use App\Http\Controllers\DashBoardPostsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\DisplayPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,9 @@ use App\Http\Controllers\SettingsController;
 */
 
 Route::get('/',[HomeController::class,'index'])->name('start');
+Route::get('/post/{post}',[DisplayPostController::class, 'index'])->name('post.show');
 
 Route::get('/dashboard',[DashBoardController::class,'index'])->middleware(['auth'])->name('dashboard');
-
 Route::get('/dashboard/users',[DashBoardUsersController::class,'index'])->middleware(['auth'])->name('dashboard/users');
 Route::get('/dashboard/choose_user',[DashBoardUsersController::class,'create'])->middleware(['auth'])->name('dashboard/users/choose_user');
 Route::post('/dashboard/update_user',[DashBoardUsersController::class,'update'])->middleware(['auth'])->name('dashboard/users/update_user');

@@ -13,7 +13,7 @@
                               </div>
                             @endif
                             <div class="w-full py-4 px-6 md:w-full text-gray-800 flex flex-col justify-between">
-                                <a class="font-semibold text-lg leading-tight truncate no-underline hover:underline" href="">{{ $post->title}}</a>
+                                <a href="{{ route('post.show', ['post' => $post->slug]) }}" class="font-semibold text-lg leading-tight truncate no-underline hover:underline" href="">{{ $post->title}}</a>
                                 <p class="mt-2">
                                   {{ str_replace(["&nbsp;","&lt;"], "",strip_tags(implode(' ', array_slice(explode(' ', $post->description), 0, 80))."...")) }}
                                 </p>
