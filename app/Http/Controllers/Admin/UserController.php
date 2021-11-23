@@ -18,7 +18,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('dashboard.admin.users', compact('users'));
+        $permissions = Permission::all();
+        return view('dashboard/admin/users', compact('users','permissions'));
     }
 
     /**
@@ -47,23 +48,30 @@ class UserController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
+        $permissions = Permission::all();
+        return view('dashboard.admin.edit_user', compact('user', 'permissions'));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
-        $current_permission = User::where('id', '=', $request->id)->value('permission_id');
-        $desired_permission = $request->permission_id;
-        
-        if($current_permission != $desired_permission){
-            User::where('id', '=', $request->id)->update(['permission_id' => $desired_permission]);
-        }
+        $desired_name = $request->user_name;
+        $desired_email = $request->user_email;
+        $desired_permission = $request->desired_permission;
 
-        if($request->user_delete){
-            $this->destroy($request->id);
-        }
+        User::where('id', '=', $user->id)->update(['name' => $desired_name, 'email' => $desired_email, 'permission_id' => $desired_permission]);
         
         return Redirect('dashboard/users');
     }
@@ -74,8 +82,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        User::destroy($id);
+        $user->delete();
+        return Redirect('dashboard/users');
     }
 }
