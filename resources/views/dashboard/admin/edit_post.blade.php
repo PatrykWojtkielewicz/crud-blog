@@ -2,7 +2,7 @@
 
 @section('dashboard_content')
     <div class="container m-auto"> 
-        <form action="{{ route('dashboard/posts/edit') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('dashboard.posts.edit') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input class="hidden" name="post_id" value="{{ $post->id }}"/>
             <input class="hidden" name="post_active" value="{{ $post->active }}"/>

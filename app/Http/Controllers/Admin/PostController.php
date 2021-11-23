@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -12,7 +12,9 @@ use Illuminate\Http\File;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostRequest;
 
-class DashBoardPostsController extends Controller
+use App\Http\Controllers\Controller;
+
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -83,37 +85,6 @@ class DashBoardPostsController extends Controller
             'active' => $request['post_active'],
         ]);
         return Redirect('dashboard/posts');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request){
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        //
     }
 
     /**

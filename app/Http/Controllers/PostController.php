@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\File;
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Comment;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostRequest;
 
@@ -17,9 +20,19 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($post)
     {
-        //
+        $post = Post::where('slug', '=', $post)->first();
+        $author = User::where('id', '=', $post->user_id)->value('name');
+        $users = User::all();
+        $comments = Comment::where('post_id', '=', $post->id)->get();
+        if(Auth::check()){
+            $permission = Permission::where('id', '=', Auth::user()->permission_id)->value('name');
+        }
+        else{
+            $permission = 'user';
+        }
+        return view('display_post', compact('post','author','comments','users','permission'));
     }
 
     /**
@@ -60,50 +73,5 @@ class PostController extends Controller
             'active' => 1,
         ]);
         return Redirect('/');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

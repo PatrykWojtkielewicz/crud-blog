@@ -11,7 +11,7 @@
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Zmień uprawnienia</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-red-500">Usuń</th>
             </tr>
-                <form action="{{ route('dashboard/users/update_user') }}" method="POST">
+                <form action="{{ route('dashboard.users.update') }}" method="POST">
                     @csrf
                     <tr class="border-b-2">
                         <td class="px-6 py-4 whitespace-nowrap"><input class="hidden" name="id" value="{{ $user->id }}">{{ $user->id }}</td>

@@ -2,7 +2,7 @@
 
 @section('dashboard_content')
     <div class="container m-auto"> 
-        <form action="{{ route('dashboard/posts/update_post') }}" method="POST">
+        <form action="{{ route('dashboard.posts.update') }}" method="POST">
             @csrf
             <table class="w-full">
                 <tr class="border-black border-b-2">
@@ -18,7 +18,7 @@
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-red-500">Usuń post</th>
                 </tr>
                 @foreach($posts as $post)
-                    <tr class="border-b-2">
+                    <tr class="border-b-2 @if($post->active == False) bg-gray-200 @endif">
                         <td class="px-6 py-4 whitespace-nowrap">
                             @if(!empty($post->image))
                                 <img class="inset-0 h-full w-full object-cover object-center" src="{{ asset('storage/'.$post->image) }}" />

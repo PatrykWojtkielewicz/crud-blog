@@ -2,7 +2,7 @@
 
 @section('dashboard_content')
     <div class="container m-auto"> 
-        <form action="{{ route('dashboard/users/show_user') }}" method="POST">
+        <form action="{{ route('dashboard.users.show_user') }}" method="POST">
             @csrf
             <label for="user-select">Wybierz użytkownika którego chcesz edytować</label><br/>
             <select name="user_id" id="user-select">

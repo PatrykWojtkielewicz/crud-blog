@@ -2,12 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DashBoardController;
-use App\Http\Controllers\DashBoardUsersController;
-use App\Http\Controllers\DashBoardPostsController;
+use App\Http\Controllers\Admin\DashBoardController as AdminController;
+use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\DisplayPostController;
 use App\Http\Controllers\CommentController;
 
 /*
@@ -22,23 +21,28 @@ use App\Http\Controllers\CommentController;
 */
 
 Route::get('/',[HomeController::class,'index'])->name('start');
-Route::get('/post/{post}',[DisplayPostController::class, 'index'])->name('post.show');
-Route::get('/post/{post}#comments',[DisplayPostController::class, 'index'])->name('post.show.comment');
-Route::post('/comment/add',[CommentController::class, 'store'])->middleware(['auth'])->name('comment.add');
-Route::post('/comment/delete',[CommentController::class, 'destroy'])->middleware(['auth'])->name('comment.delete');
 
-Route::get('/dashboard',[DashBoardController::class,'index'])->middleware(['auth'])->name('dashboard');
-Route::get('/dashboard/users',[DashBoardUsersController::class,'index'])->middleware(['auth'])->name('dashboard/users');
-Route::get('/dashboard/choose_user',[DashBoardUsersController::class,'create'])->middleware(['auth'])->name('dashboard/users/choose_user');
-Route::post('/dashboard/update_user',[DashBoardUsersController::class,'update'])->middleware(['auth'])->name('dashboard/users/update_user');
-Route::post('/dashboard/show_user',[DashBoardUsersController::class,'show'])->middleware(['auth'])->name('dashboard/users/show_user');
+Route::get('/post/{post}',[PostController::class, 'index'])->name('post.show');
+Route::get('/post/{post}#comments',[PostController::class, 'index'])->name('post.show.comment');
 
-Route::get('/dashboard/posts',[DashBoardPostsController::class,'index'])->middleware(['auth'])->name('dashboard/posts');
-Route::post('/dashboard/update_post',[DashBoardPostsController::class,'create'])->middleware(['auth'])->name('dashboard/posts/update_post');
-Route::post('/dashboard/edit',[DashBoardPostsController::class,'store'])->middleware(['auth'])->name('dashboard/posts/edit');
+Route::group(['middleware' => 'auth'], function(){
+    Route::post('/comment/add',[CommentController::class, 'store'])->name('comment.add');
+    Route::post('/comment/delete',[CommentController::class, 'destroy'])->name('comment.delete');
+    Route::get('/settings',[SettingsController::class,'index'])->name('settings');
+    Route::get('/new_post',[PostController::class,'create'])->name('new_post');
+    Route::post('/add_post',[PostController::class,'store'])->name('add_post');
+});
 
-Route::get('/settings',[SettingsController::class,'index'])->middleware(['auth'])->name('settings');
-Route::get('/new_post',[PostController::class,'create'])->middleware(['auth'])->name('new_post');
-Route::post('/add_post',[PostController::class,'store'])->middleware(['auth'])->name('add_post');
+Route::group(['prefix' => '/dashboard','middleware' => 'auth'], function(){
+    Route::get('/users',[AdminUserController::class,'index'])->name('dashboard.users');
+    Route::get('/choose_user',[AdminUserController::class,'create'])->name('dashboard.users.choose');
+    Route::post('/update_user',[AdminUserController::class,'update'])->name('dashboard.users.update');
+    Route::post('/show_user',[AdminUserController::class,'show'])->name('dashboard.users.show_user');
+
+    Route::get('/posts',[AdminPostController::class,'index'])->name('dashboard.posts');
+    Route::post('/update_post',[AdminPostController::class,'create'])->name('dashboard.posts.update');
+    Route::post('/edit',[AdminPostController::class,'store'])->name('dashboard.posts.edit');
+    Route::get('/',[AdminController::class,'index'])->name('dashboard');
+});
 
 require __DIR__.'/auth.php';

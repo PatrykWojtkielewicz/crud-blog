@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Permission;
 
-class DashBoardUsersController extends Controller
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,17 +35,6 @@ class DashBoardUsersController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -54,25 +45,6 @@ class DashBoardUsersController extends Controller
         $user = User::where('id', '=', $request->user_id)->first();
         $permissions = Permission::all();
         return view('dashboard.admin.alter_user', compact('user', 'permissions'));
-        /*
-        if($request->permission == "admin"){
-            echo("admin");
-        }
-        else if($request->permission == "user"){
-            echo("user");
-        }
-        */
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        
     }
 
     /**

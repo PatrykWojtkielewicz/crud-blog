@@ -10,13 +10,13 @@
                             <a href="{{ route('new_post') }}" class="no-underline hover:underline p-2">Dodaj Post</a>
                         </li>
                         <li>
-                            <a href="{{ route('dashboard/posts') }}" class="no-underline hover:underline p-2">Przeglądaj posty</a>
+                            <a href="{{ route('dashboard.posts') }}" class="no-underline hover:underline p-2">Przeglądaj posty</a>
                         </li>
                         <li>
-                            <a href="{{ route('dashboard/users') }}" class="no-underline hover:underline p-2">Przeglądaj użytkowników</a>
+                            <a href="{{ route('dashboard.users') }}" class="no-underline hover:underline p-2">Przeglądaj użytkowników</a>
                         </li>
                         <li>
-                            <a href="{{ route('dashboard/users/choose_user') }}" class="no-underline hover:underline p-2">Edytuj użytkownika</a>
+                            <a href="{{ route('dashboard.users.choose') }}" class="no-underline hover:underline p-2">Edytuj użytkownika</a>
                         </li>
                     </ul>
                 </div>
