@@ -14,13 +14,7 @@
                     <td class="px-6 py-4 whitespace-nowrap" name="id">{{ $user->id }}<input class="hidden" name="id" value="{{ $user->id }}"/></td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ $user->email }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        @foreach($permissions as $permission)
-                            @if($user->permission_id == $permission->id)
-                                {{ $permission->name }}
-                            @endif
-                        @endforeach
-                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $user->permission->name }}</td>
                 </tr>
             @endforeach
         </table>

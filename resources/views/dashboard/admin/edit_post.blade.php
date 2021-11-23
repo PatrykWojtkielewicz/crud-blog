@@ -2,8 +2,9 @@
 
 @section('dashboard_content')
     <div class="container m-auto"> 
-        <form action="{{ route('dashboard.posts.edit') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('dashboard/posts/'.$post->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <input class="hidden" name="post_id" value="{{ $post->id }}"/>
             <input class="hidden" name="post_active" value="{{ $post->active }}"/>
             <div class="shadow sm:rounded-md sm:overflow-hidden">

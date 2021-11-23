@@ -74,4 +74,8 @@ class PostController extends Controller
         ]);
         return Redirect('/');
     }
+
+    public function edit($id) {
+        dd($id);
+    }
 }

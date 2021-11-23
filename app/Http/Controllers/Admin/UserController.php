@@ -18,8 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        $permissions = Permission::all();
-        return view('dashboard.admin.users', compact('users','permissions'));
+        return view('dashboard.admin.users', compact('users'));
     }
 
     /**

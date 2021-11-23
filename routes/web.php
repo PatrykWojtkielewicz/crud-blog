@@ -34,15 +34,23 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::group(['prefix' => '/dashboard','middleware' => 'auth'], function(){
+    Route::get('/',[AdminController::class,'index'])->name('dashboard');
+
     Route::get('/users',[AdminUserController::class,'index'])->name('dashboard.users');
     Route::get('/choose_user',[AdminUserController::class,'create'])->name('dashboard.users.choose');
     Route::post('/update_user',[AdminUserController::class,'update'])->name('dashboard.users.update');
     Route::post('/show_user',[AdminUserController::class,'show'])->name('dashboard.users.show_user');
 
+    //Route::resource('posts', [AdminPostController::class]);
+    Route::get('/posts',[AdminPostController::class,'index'])->name('dashboard.posts');
+    Route::get('/posts/{post}/edit',[AdminPostController::class,'edit'])->name('dashboard.posts.edit');
+    Route::put('/posts/{post}',[AdminPostController::class,'update'])->name('dashboard.posts.update');
+    Route::delete('/posts/{post}',[AdminPostController::class,'destroy'])->name('dashboard.posts.delete');
+    /*
     Route::get('/posts',[AdminPostController::class,'index'])->name('dashboard.posts');
     Route::post('/update_post',[AdminPostController::class,'create'])->name('dashboard.posts.update');
     Route::post('/edit',[AdminPostController::class,'store'])->name('dashboard.posts.edit');
-    Route::get('/',[AdminController::class,'index'])->name('dashboard');
+    */
 });
 
 require __DIR__.'/auth.php';
