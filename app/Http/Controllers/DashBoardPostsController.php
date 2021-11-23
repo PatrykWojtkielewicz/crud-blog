@@ -66,10 +66,8 @@ class DashBoardPostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EditPostRequest $request)
+    public function store(Request $request)
     {
-        dd($request);
-        /*
         if(!empty($request['post_image'])){
             $path = Storage::disk('public')->put('photos', new File($request['post_image']), 'public');
         }
@@ -85,7 +83,6 @@ class DashBoardPostsController extends Controller
             'active' => $request['post_active'],
         ]);
         return Redirect('dashboard/posts');
-        */
     }
 
     /**
