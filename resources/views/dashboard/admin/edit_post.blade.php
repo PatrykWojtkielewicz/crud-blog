@@ -5,6 +5,7 @@
         <form action="{{ route('dashboard/posts/edit') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input class="hidden" name="post_id" value="{{ $post->id }}"/>
+            <input class="hidden" name="post_active" value="{{ $post->active }}"/>
             <div class="shadow sm:rounded-md sm:overflow-hidden">
                 <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                     <div>

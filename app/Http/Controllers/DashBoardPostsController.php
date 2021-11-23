@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PostRequest;
 
 class DashBoardPostsController extends Controller
 {
@@ -31,63 +32,7 @@ class DashBoardPostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request){
-        if(!empty($request['post_image'])){
-            $path = Storage::disk('public')->put('photos', new File($request['post_image']), 'public');
-        }
-        else{
-            $path = "";
-        }
-        Post::where('id', '=', $request->post_id)->update([
-            'title' => $request['post_title'],
-            'description' => $request['post_content'],
-            'image' => $path,
-            'slug' => Str::slug($request['post_title']),
-            'user_id' => Auth::id(),
-            'active' => 1,
-        ]);
-        return Redirect('dashboard/posts');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
+    public function create(Request $request)
     {
         $arr = explode('-', $request->action);
         $action = $arr[0];
@@ -113,6 +58,65 @@ class DashBoardPostsController extends Controller
                 return Redirect('dashboard/posts');
                 break;
         }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(EditPostRequest $request)
+    {
+        dd($request);
+        /*
+        if(!empty($request['post_image'])){
+            $path = Storage::disk('public')->put('photos', new File($request['post_image']), 'public');
+        }
+        else{
+            $path = "";
+        }
+        Post::where('id', '=', $request->post_id)->update([
+            'title' => $request['post_title'],
+            'description' => $request['post_content'],
+            'image' => $path,
+            'slug' => Str::slug($request['post_title']),
+            'user_id' => Auth::id(),
+            'active' => $request['post_active'],
+        ]);
+        return Redirect('dashboard/posts');
+        */
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request){
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        //
     }
 
     /**

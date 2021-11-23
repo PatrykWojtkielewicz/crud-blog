@@ -34,8 +34,8 @@ Route::post('/dashboard/update_user',[DashBoardUsersController::class,'update'])
 Route::post('/dashboard/show_user',[DashBoardUsersController::class,'show'])->middleware(['auth'])->name('dashboard/users/show_user');
 
 Route::get('/dashboard/posts',[DashBoardPostsController::class,'index'])->middleware(['auth'])->name('dashboard/posts');
-Route::post('/dashboard/update_post',[DashBoardPostsController::class,'update'])->middleware(['auth'])->name('dashboard/posts/update_post');
-Route::post('/dashboard/edit',[DashBoardPostsController::class,'edit'])->middleware(['auth'])->name('dashboard/posts/edit');
+Route::post('/dashboard/update_post',[DashBoardPostsController::class,'create'])->middleware(['auth'])->name('dashboard/posts/update_post');
+Route::post('/dashboard/edit',[DashBoardPostsController::class,'store'])->middleware(['auth'])->name('dashboard/posts/edit');
 
 Route::get('/settings',[SettingsController::class,'index'])->middleware(['auth'])->name('settings');
 Route::get('/new_post',[PostController::class,'create'])->middleware(['auth'])->name('new_post');

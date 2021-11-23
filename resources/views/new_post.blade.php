@@ -15,7 +15,7 @@
                                 @endforeach
                             </label>
                             <div class="mt-1">
-                                <input type="text" id="post_title" name="post_title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                                <input type="text" id="post_title" name="post_title" value="{{ old('post_title') }}" maxlength="255" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                             </div>
                         </div>
                         <div>
@@ -26,7 +26,7 @@
                                 @endforeach
                             </label>
                             <div class="mt-1">
-                                <textarea id="post_content" name="post_content" rows="16" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                                <textarea id="post_content" name="post_content" rows="16" value="{{ old('post_content') }}" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
                             </div>
                         </div>
                         <div>

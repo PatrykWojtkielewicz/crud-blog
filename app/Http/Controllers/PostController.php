@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\File;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -42,7 +43,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         if(!empty($request['post_image'])){
             $path = Storage::disk('public')->put('photos', new File($request['post_image']), 'public');

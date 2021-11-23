@@ -31,6 +31,7 @@
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
             <p class="text-left">
                 <a href="{{ route('start') }}" class="no-underline hover:underline p-4" >Strona Główna</a>
+                {{ @csrf_token() }}
             </p>
             <p class="text-right">
                 @auth
