@@ -14,15 +14,18 @@
                             </div>
                         @endif
                         <div class="w-full py-4 px-6 md:w-full text-gray-800 flex flex-col justify-between">
-                            <a href="{{ route('post.show', ['post' => $post->slug]) }}" class="font-semibold text-lg leading-tight truncate no-underline hover:underline" href="">{{ $post->title}}</a>
+                            <div class="">
+                                <a href="{{ route('post.show', ['post' => $post->slug]) }}" class="font-semibold text-lg leading-tight truncate no-underline hover:underline" href="">{{ $post->title}}</a>
+                                <p class="text-blue-600">#dog #tips</p>
+                            </div>
                             <p class="mt-2">
                                 {{ str_replace(["&nbsp;","&lt;"], "",strip_tags(implode(' ', array_slice(explode(' ', $post->description), 0, 80))."...")) }}
                             </p>
-                            <div class="mt-2 flex flex-row justify-end">
+                            <div class="mt-2 flex flex-row justify-between">
                                 <p class="mr-auto">
                                     <i class="far fa-thumbs-up fa-lg"></i>
                                     <span class="text-lg">{{ $post->likes }}</span>
-                                    <i class="far fa-thumbs-down fa-lg"></i>
+                                    <i class="far fa-thumbs-down fa-lg pl-2"></i>
                                     <span class="text-lg">{{ $post->dislikes }}</span>
                                 </p>
                                 <p class="text-gray-900 capitalize">{{ $post->user->name }},&nbsp;</p>

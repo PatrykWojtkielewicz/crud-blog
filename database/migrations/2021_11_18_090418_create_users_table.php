@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('permission_id')->constrained()->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

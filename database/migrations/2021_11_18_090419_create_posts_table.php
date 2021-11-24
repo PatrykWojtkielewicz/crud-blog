@@ -24,6 +24,7 @@ class CreatePostsTable extends Migration
             $table->integer('likes');
             $table->integer('dislikes');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

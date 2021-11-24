@@ -8,7 +8,7 @@
                 @if(!empty($post->image))
                     <img class="mx-auto w-full" src="{{ asset('storage/'.$post->image) }}"/>
                 @endif
-                <div class="bg-gray-800 p-4 mb-6 h-full w-full text-white rounded-b-3xl">
+                <div class="bg-indigo-900 p-4 mb-6 h-full w-full text-white rounded-b-3xl">
                     <h2 class="text-3xl px-4 text-center">{{ $post->title }}</h2>
                 </div>
                 <p class="text-xl">@php echo ($post->description); @endphp</p>
