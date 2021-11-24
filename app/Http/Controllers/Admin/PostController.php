@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -77,16 +79,22 @@ class PostController extends Controller
         if(!empty($request['post_image'])){
             $path = Storage::disk('public')->put('photos', new File($request['post_image']), 'public');
         }
+        else if(isset($request->use_old_image)){
+            $path = $request->post_old_image;
+        }
         else{
             $path = "";
         }
+        
+        $active = (isset($request['post_visibility']) ? True : False);
+
         Post::where('id', '=', $request->post_id)->update([
             'title' => $request['post_title'],
             'description' => $request['post_content'],
             'image' => $path,
             'slug' => Str::slug($request['post_title']),
             'user_id' => Auth::id(),
-            'active' => $request['post_active'],
+            'active' => $active,
         ]);
         return Redirect('dashboard/posts');
     }

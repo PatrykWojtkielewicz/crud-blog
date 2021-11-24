@@ -6,11 +6,10 @@
             @csrf
             @method('PUT')
             <input class="hidden" name="post_id" value="{{ $post->id }}"/>
-            <input class="hidden" name="post_active" value="{{ $post->active }}"/>
             <div class="shadow sm:rounded-md sm:overflow-hidden">
                 <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                     <div>
-                        <label for="about" class="block text-sm font-medium text-gray-700">
+                        <label for="post_title" class="block text-sm font-medium text-gray-700">
                             Tytuł posta
                             @foreach ($errors->get('post_title') as $message)
                                 <span class="text-red-600">{{ $message }}</span>
@@ -18,6 +17,10 @@
                         </label>
                         <div class="mt-1">
                             <input type="text" id="post_title" name="post_title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ $post->title }}"/>
+                        </div>
+                        <div class="mt-1">
+                            <label for="post_visibilty">Widoczność posta</label>
+                            <input type="checkbox" name="post_visibility" id="post_visibilty" @if($post->active == True) checked @endif/>
                         </div>
                     </div>
                     <div>
@@ -56,12 +59,15 @@
                                 @endforeach
                             </label>
                             <div class="mt-1 flex justify-center px-6 pt-5 pb-6 rounded-md"> 
-                                @if(!empty($post->image))
-                                    <img src="{{ asset('storage/'.$post->image) }}"/>
-                                @else
+                                @if(empty($post->image))
                                     <p>Brak zdjęcia</p>
-                                @endif
+                                @else
+                                    <img src="{{ asset('storage/'.$post->image) }}"/>
+                                    <input type="hidden" class="hidden" name="post_old_image" value="{{ $post->image }}"/>
                             </div>
+                                    <label for="old_image">Użyj starego zdjęcia</label>
+                                    <input type="checkbox" name="use_old_image" id="old_image"/>
+                                @endif
                         </div>
                     </div>
                 </div>
