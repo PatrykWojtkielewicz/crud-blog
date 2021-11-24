@@ -77,7 +77,7 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         if(!empty($request['post_image'])){
-            $path = Storage::disk('public')->put('photos', new File($request->post_visibility), 'public');
+            $path = Storage::disk('public')->put('photos', new File($request->post_image), 'public');
         }
         else if(isset($request->use_old_image)){
             $path = $request->post_old_image;
