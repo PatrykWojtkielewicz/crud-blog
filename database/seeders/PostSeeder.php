@@ -26,7 +26,7 @@ class PostSeeder extends Seeder
                 Quisque massa purus, convallis ut ante a, aliquet porttitor felis. Nulla lacinia lorem aliquam, dictum nunc at, egestas nibh. Sed arcu sapien, iaculis sit amet nisi id, accumsan consectetur diam. Maecenas in nisi id sem dignissim ullamcorper et ac ex. Nam placerat elit in felis porttitor mattis. Etiam vel hendrerit mi. Nunc et egestas massa, nec pellentesque orci. Vestibulum vel ante at risus euismod congue. Ut at lorem neque.',
 
                 'image' => 'photos/TytoFbZEDVNX1M01ZJTuE3HBNNvNAroN5aSBFshP.jpg',
-                'slug' => Str::slug('Post '.($i+2)),
+                'slug' => Str::slug('Post '.($i+1)),
                 'user_id' => "1",
                 'active' => "1",
                 'likes' => "25",
