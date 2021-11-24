@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\DislikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +30,13 @@ Route::get('/post/{post}#comments',[PostController::class, 'index'])->name('post
 Route::group(['middleware' => 'auth'], function(){
     Route::post('/comment/add',[CommentController::class, 'store'])->name('comment.add');
     Route::post('/comment/delete',[CommentController::class, 'destroy'])->name('comment.delete');
+
     Route::get('/settings',[SettingsController::class,'index'])->name('settings');
     Route::get('/new_post',[PostController::class,'create'])->name('new_post');
     Route::post('/add_post',[PostController::class,'store'])->name('add_post');
+
+    Route::put('/like/{post}',[LikeController::class,'update'])->name('like.update');
+    Route::put('/dislike/{post}',[DislikeController::class,'update'])->name('dislike.update');
 });
 
 Route::group(['prefix' => '/dashboard','middleware' => 'auth'], function(){

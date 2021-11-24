@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['title','description','image','slug','user_id','active'];
+    protected $fillable = ['title','description','image','slug','user_id','active','likes'];
     public function user(){
         return $this->belongsTo(User::class);
     }
     public function comment(){
         return $this->hasMany(Comment::class);
+    }
+    public function like(){
+        return $this->hasMany(Like::class);
     }
 }

@@ -29,6 +29,8 @@ class PostSeeder extends Seeder
                 'slug' => Str::slug('Post '.($i+2)),
                 'user_id' => "1",
                 'active' => "1",
+                'likes' => "25",
+                'dislikes' => "10",
 
             ]);
 
@@ -45,6 +47,8 @@ class PostSeeder extends Seeder
                 'slug' => Str::slug('Post '.($i+2)),
                 'user_id' => "1",
                 'active' => "1",
+                'likes' => "25",
+                'dislikes' => "10",
 
             ]);
 
@@ -61,6 +65,8 @@ class PostSeeder extends Seeder
                 'slug' => Str::slug('Post '.($i+3)),
                 'user_id' => "1",
                 'active' => "1",
+                'likes' => "25",
+                'dislikes' => "10",
 
             ]);
         }

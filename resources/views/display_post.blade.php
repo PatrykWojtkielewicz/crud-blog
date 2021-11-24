@@ -12,12 +12,38 @@
                     <h2 class="text-3xl px-4 text-center">{{ $post->title }}</h2>
                 </div>
                 <p class="text-xl">@php echo ($post->description); @endphp</p>
-                <p class="text-right capitalize">{{ $author }}</p>
-                @php
-                    $created_at = $post->created_at;
-                    $date = $created_at->year."-".$created_at->month."-".$created_at->day;
-                @endphp
-                <p class="text-right">{{ $date }}</p>
+                <div class="flex flex-row justify-between">
+                    <div class="flex flex-row justify-between">
+                        <form action="{{ url('like/'.$post->id) }}" method="POST" class="p-4">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit">
+                                @if($liked)
+                                    <i class="fas fa-thumbs-up fa-lg"></i>
+                                @else
+                                    <i class="far fa-thumbs-up fa-lg"></i>
+                                @endif
+                                <span class="text-lg">{{ $post->likes }}</span>
+                            </button>
+                        </form>
+                        <form action="{{ url('dislike/'.$post->id) }}" method="POST" class="p-4">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit">
+                                @if($disliked)
+                                    <i class="fas fa-thumbs-down fa-lg"></i>
+                                @else
+                                    <i class="far fa-thumbs-down fa-lg"></i>
+                                @endif
+                                <span class="text-lg">{{ $post->dislikes }}</span>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="">
+                        <p class="text-gray-900 capitalize">{{ $post->user->name }},&nbsp;</p>
+                        <p class="text-gray-600">{{ date('d-m-Y', strtotime($post->created_at)) }}</p>
+                    </div>
+                </div>
                 <!-- Comment section -->
                 <div class="container p-4 mt-8 bg-gray-100 rounded-t-3xl" id="comments">
                     <p class="text-xl text-center rounded-t-3xl bg-gray-200 p-4 shadow-lg">
@@ -47,28 +73,20 @@
                     <form action="{{ route('comment.delete') }}" method="POST">
                         @csrf
                     @endif
+                    <!-- Show comments -->
                     @foreach ($comments->reverse() as $comment)
-                        @php
-                            $created_at = $comment->created_at;
-                            $date = $created_at->year."-".$created_at->month."-".$created_at->day;
-                            foreach($users as $user){
-                                if($comment->user_id == $user->id){
-                                    $username = $user->name;
-                                }
-                            }
-                        @endphp
                         <div class="flex p-4">
                             <div class="w-4/6">
-                                <p class="capitalize font-bold">{{ $username }}</p>
+                                <p class="capitalize font-bold">{{ $comment->user->name }}</p>
                                 <p class="w-full break-words">{{ $comment->content }}</p>
                             </div>
                             @if($permission == 'admin')
-                                <div class="w-1/6 text-right">{{ $date }}</div>
+                                <div class="w-1/6 text-right">{{ date('d-m-Y', strtotime($post->created_at)) }}</div>
                                 <div class="w-1/6 text-right">
                                     <input type="checkbox" name="delete[]" value="{{ $comment->id }}"/>
                                 </div>
                             @else
-                                <div class="w-2/6 text-right">{{ $date }}</div>
+                                <div class="w-2/6 text-right">{{ date('d-m-Y', strtotime($post->created_at)) }}</div>
                             @endif
                         </div>
                         <hr/>

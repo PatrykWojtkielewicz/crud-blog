@@ -8,6 +8,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- TinyMCE -->
     <script src="https://cdn.tiny.cloud/1/pqh1agigvkv547khuf7xyehg024sk75vqh0i7zixj59yqc5e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/8714f19098.js" crossorigin="anonymous"></script>
     <script>
         tinymce.init({
             selector: '#post_content',

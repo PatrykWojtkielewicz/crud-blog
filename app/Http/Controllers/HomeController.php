@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\post;
-use App\Models\user;
+use App\Models\Post;
+use App\Models\Like;
+use App\Models\Dislike;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -16,8 +17,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        $users = User::all();
-        return view('posts', compact('posts', 'users'));
+        $posts = Post::all();;
+        return view('posts', compact('posts'));
     }
 }

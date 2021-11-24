@@ -6,6 +6,7 @@
             @csrf
             @method('PUT')
             <input class="hidden" name="post_id" value="{{ $post->id }}"/>
+            <input class="hidden" name="post_likes" value="{{ $post->like_count }}"/>
             <div class="shadow sm:rounded-md sm:overflow-hidden">
                 <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                     <div>
@@ -54,9 +55,6 @@
                         <div class="w-1/2 text-center">
                             <label class="block text-sm font-medium text-gray-700">
                                 Stare zdjęcie
-                                @foreach ($errors->get('post_image') as $message)
-                                    <span class="text-red-600">{{ $message }}</span>
-                                @endforeach
                             </label>
                             <div class="mt-1 flex justify-center px-6 pt-5 pb-6 rounded-md"> 
                                 @if(empty($post->image))

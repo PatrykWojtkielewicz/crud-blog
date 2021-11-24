@@ -17,9 +17,9 @@ class CommentController extends Controller
     public function store(CommentRequest $request)
     {
         Comment::create([
-            'user_id' => $request['author_id'],
-            'post_id' => $request['post_id'],
-            'content' => $request['content'],
+            'user_id' => $request->author_id,
+            'post_id' => $request->post_id,
+            'content' => $request->content,
         ]);
         return Redirect()->route('post.show.comment', ['post' => $request->slug]);
     }

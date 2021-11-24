@@ -77,7 +77,7 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         if(!empty($request['post_image'])){
-            $path = Storage::disk('public')->put('photos', new File($request['post_image']), 'public');
+            $path = Storage::disk('public')->put('photos', new File($request->post_visibility), 'public');
         }
         else if(isset($request->use_old_image)){
             $path = $request->post_old_image;
@@ -85,16 +85,15 @@ class PostController extends Controller
         else{
             $path = "";
         }
-        
-        $active = (isset($request['post_visibility']) ? True : False);
 
         Post::where('id', '=', $request->post_id)->update([
-            'title' => $request['post_title'],
-            'description' => $request['post_content'],
+            'title' => $request->post_title,
+            'description' => $request->post_content,
             'image' => $path,
-            'slug' => Str::slug($request['post_title']),
+            'slug' => Str::slug($request->post_title),
             'user_id' => Auth::id(),
-            'active' => $active,
+            'active' => (isset($request->post_visibility) ? True : False),
+            'likes' => $request->post_likes,
         ]);
         return Redirect('dashboard/posts');
     }
@@ -108,7 +107,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        $posts = Post::all();
-        return view('dashboard/admin/posts', compact('posts'));
+        return Redirect('dashboard/posts');
     }
 }

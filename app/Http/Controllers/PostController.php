@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\File;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Like;
+use App\Models\Dislike;
 use App\Models\Comment;
 use App\Models\Permission;
 use Illuminate\Support\Facades\Auth;
@@ -23,8 +25,6 @@ class PostController extends Controller
     public function index($post)
     {
         $post = Post::where('slug', '=', $post)->first();
-        $author = User::where('id', '=', $post->user_id)->value('name');
-        $users = User::all();
         $comments = Comment::where('post_id', '=', $post->id)->get();
         if(Auth::check()){
             $permission = Permission::where('id', '=', Auth::user()->permission_id)->value('name');
@@ -32,7 +32,10 @@ class PostController extends Controller
         else{
             $permission = 'user';
         }
-        return view('display_post', compact('post','author','comments','users','permission'));
+        $liked = Like::where('user_id', '=', Auth::id())->where('post_id', '=', $post->id)->exists();
+        $disliked = Dislike::where('user_id', '=', Auth::id())->where('post_id', '=', $post->id)->exists();
+
+        return view('display_post', compact('post','comments','permission','liked','disliked'));
     }
 
     /**
@@ -58,19 +61,16 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        if(!empty($request['post_image'])){
-            $path = Storage::disk('public')->put('photos', new File($request['post_image']), 'public');
-        }
-        else{
-            $path = "";
-        }
+        $path = !empty($request->post_image) ? Storage::disk('public')->put('photos', new File($request->post_image), 'public') : "";
+
         Post::create([
-            'title' => $request['post_title'],
-            'description' => $request['post_content'],
+            'title' => $request->post_title,
+            'description' => $request->post_content,
             'image' => $path,
-            'slug' => Str::slug($request['post_title']),
+            'slug' => Str::slug($request->post_title),
             'user_id' => Auth::id(),
             'active' => 1,
+            'likes' => 0,
         ]);
         return Redirect('/');
     }

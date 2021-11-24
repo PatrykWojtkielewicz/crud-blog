@@ -21,6 +21,8 @@ class CreatePostsTable extends Migration
             $table->string('slug'); // formats title
             $table->foreignId('user_id')->constrained();
             $table->boolean('active');
+            $table->integer('likes');
+            $table->integer('dislikes');
             $table->timestamps();
         });
     }
