@@ -26,12 +26,9 @@ class PostController extends Controller
     {
         $post = Post::where('slug', '=', $post)->first();
         $comments = Comment::where('post_id', '=', $post->id)->get();
-        if(Auth::check()){
-            $permission = Permission::where('id', '=', Auth::user()->permission_id)->value('name');
-        }
-        else{
-            $permission = 'user';
-        }
+
+        $permission = (Auth::check()) ? Permission::where('id', '=', Auth::user()->permission_id)->value('name') : 'user';
+
         $liked = Like::where('user_id', '=', Auth::id())->where('post_id', '=', $post->id)->exists();
         $disliked = Dislike::where('user_id', '=', Auth::id())->where('post_id', '=', $post->id)->exists();
 
@@ -73,9 +70,5 @@ class PostController extends Controller
             'likes' => 0,
         ]);
         return Redirect('/');
-    }
-
-    public function edit($id) {
-        dd($id);
     }
 }

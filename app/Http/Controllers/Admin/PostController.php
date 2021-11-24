@@ -94,6 +94,7 @@ class PostController extends Controller
             'user_id' => Auth::id(),
             'active' => (isset($request->post_visibility) ? True : False),
             'likes' => $request->post_likes,
+            'dislikes' => $request->post_dislikes,
         ]);
         return Redirect('dashboard/posts');
     }
