@@ -10,6 +10,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\DislikeController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,7 @@ Route::get('/',[HomeController::class,'index'])->name('start');
 
 Route::get('/post/{post}',[PostController::class, 'show'])->name('post.show');
 Route::get('/post/{post}#comments',[PostController::class, 'show'])->name('post.show.comment');
+Route::get('/tags/{tag}',[TagController::class,'show'])->name('tag.show');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::post('/comment/add',[CommentController::class, 'store'])->name('comment.add');

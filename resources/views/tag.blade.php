@@ -2,7 +2,10 @@
 
 @section('content')
     <div class="container m-auto">
-        @foreach ($posts->reverse() as $post )
+        <div class="bg-indigo-900 text-white text-center pb-4 text-4xl rounded-b-2xl container w-100 lg:w-4/5 mx-auto flex flex-col">
+            Kategoria "{{ $tag_name }}"
+        </div>
+        @foreach ($posts as $post )
             @if($post->active == "1")
                 <div class="container w-100 lg:w-4/5 mx-auto flex flex-col">
                     <div v-for="card in cards" class="flex flex-col md:flex-row overflow-hidden bg-white rounded-lg shadow-md mt-4 w-100 mx-2 hover:shadow-xl">

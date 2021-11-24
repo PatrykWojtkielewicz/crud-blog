@@ -20,4 +20,7 @@ class Post extends Model
     public function like(){
         return $this->hasMany(Like::class);
     }
+    public function tag(){
+        return $this->belongsToMany(Tag::class);
+    }
 }

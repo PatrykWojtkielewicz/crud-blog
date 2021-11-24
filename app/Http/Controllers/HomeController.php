@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\Like;
 use App\Models\Dislike;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();;
+        $posts = Post::all();
         return view('posts', compact('posts'));
     }
 }
