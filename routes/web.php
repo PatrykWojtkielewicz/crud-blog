@@ -24,8 +24,8 @@ use App\Http\Controllers\DislikeController;
 
 Route::get('/',[HomeController::class,'index'])->name('start');
 
-Route::get('/post/{post}',[PostController::class, 'index'])->name('post.show');
-Route::get('/post/{post}#comments',[PostController::class, 'index'])->name('post.show.comment');
+Route::get('/post/{post}',[PostController::class, 'show'])->name('post.show');
+Route::get('/post/{post}#comments',[PostController::class, 'show'])->name('post.show.comment');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::post('/comment/add',[CommentController::class, 'store'])->name('comment.add');

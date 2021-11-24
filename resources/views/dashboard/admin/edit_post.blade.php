@@ -47,6 +47,7 @@
                             <div class="mt-1 flex justify-center px-6 pt-5 pb-6 rounded-md">
                                 <div class="space-y-1 text-center">              
                                     <label class="w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer hover:bg-purple-600 hover:text-white text-purple-600 ease-linear transition-all duration-150">
+                                        <i class="fas fa-cloud-upload-alt fa-3x"></i>
                                         <span class="mt-2 text-base leading-normal">Wybierz zdjęcie</span>
                                         <input type="file" name="post_image" class="hidden"/>
                                     </label>

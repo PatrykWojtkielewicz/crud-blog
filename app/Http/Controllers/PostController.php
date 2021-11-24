@@ -18,11 +18,12 @@ use App\Http\Requests\PostRequest;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the specified resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function index($post)
+    public function show($post)
     {
         $post = Post::where('slug', '=', $post)->first();
         $comments = Comment::where('post_id', '=', $post->id)->get();
