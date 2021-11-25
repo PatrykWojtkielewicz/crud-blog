@@ -30,6 +30,33 @@
                             </div>
                         </div>
                         <div>
+                            <label for="about" class="block text-sm font-medium text-gray-700">
+                                Tagi
+                                @foreach ($errors->get('post_tags') as $message)
+                                    <span class="text-red-600">{{ $message }}</span>
+                                @endforeach
+                            </label>
+                            <div class="mt-1">
+                                <div class="grid grid-cols-2">
+                                    <div class="text-center">
+                                        <p class="p-2">Dodaj nowe:</p>
+                                        <input type="text" name="post_new_tag[]" placeholder="Tag 1" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                                        <input type="text" name="post_new_tag[]" placeholder="Tag 2" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                                        <input type="text" name="post_new_tag[]" placeholder="Tag 3" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="p-2">Wcześniej używane:</p>
+                                        @foreach($tags as $tag)
+                                            <span class="p-2">
+                                                <label for="{{ $tag->name }}">{{ $tag->name }}</label>
+                                                <input type="checkbox" name="post_tag[]" value="{{ $tag->id }}" id="{{ $tag->name }}"/>
+                                            </span>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
                             <label class="block text-sm font-medium text-gray-700">
                                 Zdjęcie
                                 @foreach ($errors->get('post_image') as $message)

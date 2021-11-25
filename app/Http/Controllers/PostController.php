@@ -12,6 +12,8 @@ use App\Models\Like;
 use App\Models\Dislike;
 use App\Models\Comment;
 use App\Models\Permission;
+use App\Models\Tag;
+use App\Models\post_tag;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostRequest;
 
@@ -44,7 +46,8 @@ class PostController extends Controller
     public function create()
     {
         if(Auth::user()->permission_id == 1){
-            return view('new_post');
+            $tags = Tag::all();
+            return view('new_post', compact('tags'));
         }
         else{
             return Redirect('/');
@@ -61,7 +64,7 @@ class PostController extends Controller
     {
         $path = !empty($request->post_image) ? Storage::disk('public')->put('photos', new File($request->post_image), 'public') : "";
 
-        Post::create([
+        $post = Post::create([
             'title' => $request->post_title,
             'description' => $request->post_content,
             'image' => $path,
@@ -69,7 +72,27 @@ class PostController extends Controller
             'user_id' => Auth::id(),
             'active' => 1,
             'likes' => 0,
+            'dislikes' => 0,
         ]);
-        return Redirect('/');
+        $alltags = array();
+        foreach($request->post_new_tag as $new_tag){
+            if($new_tag !== null){
+                $tag = Tag::create([
+                    'name' => $new_tag,
+                ]);
+                $ptag = post_tag::create([
+                    'post_id' => $post->id,
+                    'tag_id' => $tag->id,
+                ]);
+                echo("<br/><br/>");
+            }
+        }
+        foreach($request->post_tag as $new_tag){
+            post_tag::create([
+                'post_id' => $post->id,
+                'tag_id' => $new_tag,
+            ]);
+        }
+        //return Redirect('/');
     }
 }

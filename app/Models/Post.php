@@ -10,7 +10,7 @@ class Post extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title','description','image','slug','user_id','active','likes'];
+    protected $fillable = ['title','description','image','slug','user_id','active','likes','dislikes'];
     public function user(){
         return $this->belongsTo(User::class);
     }

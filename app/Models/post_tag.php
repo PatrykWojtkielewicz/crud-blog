@@ -9,6 +9,7 @@ class post_tag extends Model
 {
     use HasFactory;
     protected $table = 'post_tag';
+    protected $fillable = ['post_id','tag_id'];
     public $timestamps = false;
 
 }
