@@ -11,10 +11,17 @@
                 <div class="bg-indigo-900 p-4 mb-6 h-full w-full text-white rounded-b-3xl">
                     <h2 class="text-3xl px-4 text-center">{{ $post->title }}</h2>
                 </div>
+                <div class="text-center text-lg text-blue-600 pb-2">
+                    @foreach($post->tag as $tag)
+                        <a href="/tags/{{$tag->name}}">
+                            #{{ $tag->name }}
+                        </a>
+                    @endforeach
+                </div>
                 <p class="text-xl">@php echo ($post->description); @endphp</p>
                 <div class="flex flex-row justify-between">
                     <div class="flex flex-row justify-between">
-                        <form action="{{ url('like/'.$post->id) }}" method="POST" class="p-4">
+                        <form action="{{ url('like/'.$post->id) }}" method="POST" class="p-4" id="likeform">
                             @csrf
                             @method('PUT')
                             <button type="submit">
@@ -24,6 +31,7 @@
                                     <i class="far fa-thumbs-up fa-lg"></i>
                                 @endif
                                 <span class="text-lg">{{ $post->likes }}</span>
+                                <input type="hidden" class="hidden" name="post_id" value="{{ $post->id }}"/>
                             </button>
                         </form>
                         <form action="{{ url('dislike/'.$post->id) }}" method="POST" class="p-4">

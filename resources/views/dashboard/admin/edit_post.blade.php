@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div>
-                        <label for="about" class="block text-sm font-medium text-gray-700">
+                        <label for="about" class="block text-sm font-medium text-gray-700 text-center">
                             Tagi
                             @foreach ($errors->get('post_tags') as $message)
                                 <span class="text-red-600">{{ $message }}</span>
@@ -58,13 +58,14 @@
                                         @foreach($tags as $tag)
                                         <li class="p-2 inline-block">
                                             <label for="{{ $tag->name }}">{{ $tag->name }}</label>
-                                            <input type="checkbox" name="post_tag[]" 
+                                            <input type="hidden" name="post_tag[{{ $tag->id }}]" class="hidden" value="{{ $tag }}"/>
+                                            <input type="checkbox" name="post_tag[{{ $tag->id }}]" 
                                             @foreach ($post->tag as $i)
                                                 @if($i->name == $tag->name)
                                                     checked
                                                 @endif
                                             @endforeach
-                                            value="{{ $tag->id }}" id="{{ $tag->name }}"/>
+                                            value="{{ $tag }}" id="{{ $tag->name }}"/>
                                         </li>
                                     @endforeach
                                     </ol>

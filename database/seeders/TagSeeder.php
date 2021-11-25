@@ -14,7 +14,7 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        $tags = ['Psy', 'Koty', 'Zwierzęta', 'Porady', 'Ciekawostki'];
+        $tags = ['Psy', 'Koty', 'Zwierzęta', 'Porady', 'Ciekawostki', 'Podróże', 'Kawa', 'Jedzenie'];
         foreach($tags as $tag){
             Tag::create([
                 'name' => $tag,
