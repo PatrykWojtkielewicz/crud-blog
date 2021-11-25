@@ -15,7 +15,9 @@
                         @endif
                         <div class="w-full py-4 px-6 md:w-full text-gray-800 flex flex-col justify-between">
                             <div class="">
-                                <a href="{{ route('post.show', ['post' => $post->slug]) }}" class="font-semibold text-lg leading-tight truncate no-underline hover:underline" href="">{{ $post->title}}</a>
+                                <span>
+                                    <a href="{{ route('post.show', ['post' => $post->slug]) }}" class="font-semibold text-lg leading-tight truncate no-underline hover:underline">{{ $post->title}}</a>
+                                </span>
                                 <p class="text-blue-600">
                                     @foreach($post->tag as $tag)
                                         <a href="/tags/{{$tag->name}}">

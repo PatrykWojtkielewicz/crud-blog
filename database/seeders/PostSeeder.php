@@ -25,7 +25,7 @@ class PostSeeder extends Seeder
                 Nullam id nisi tortor. Morbi lectus justo, imperdiet vel ipsum in, volutpat semper nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie pretium metus, id maximus leo gravida vitae. Morbi sollicitudin cursus leo ac mollis. Sed eu lacus tellus. Nam ut erat dapibus, tempor massa lacinia, vestibulum nisi. Nullam nisi massa, eleifend at tortor sit amet, facilisis tincidunt turpis. Etiam pulvinar libero est. Nam ac mi non enim viverra dignissim.
                 Quisque massa purus, convallis ut ante a, aliquet porttitor felis. Nulla lacinia lorem aliquam, dictum nunc at, egestas nibh. Sed arcu sapien, iaculis sit amet nisi id, accumsan consectetur diam. Maecenas in nisi id sem dignissim ullamcorper et ac ex. Nam placerat elit in felis porttitor mattis. Etiam vel hendrerit mi. Nunc et egestas massa, nec pellentesque orci. Vestibulum vel ante at risus euismod congue. Ut at lorem neque.',
 
-                'image' => 'photos/TytoFbZEDVNX1M01ZJTuE3HBNNvNAroN5aSBFshP.jpg',
+                'image' => 'photos/GermanShepherd.jpg',
                 'slug' => Str::slug('Post '.($i+1)),
                 'user_id' => "1",
                 'active' => "1",
@@ -43,7 +43,7 @@ class PostSeeder extends Seeder
                 Nullam id nisi tortor. Morbi lectus justo, imperdiet vel ipsum in, volutpat semper nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie pretium metus, id maximus leo gravida vitae. Morbi sollicitudin cursus leo ac mollis. Sed eu lacus tellus. Nam ut erat dapibus, tempor massa lacinia, vestibulum nisi. Nullam nisi massa, eleifend at tortor sit amet, facilisis tincidunt turpis. Etiam pulvinar libero est. Nam ac mi non enim viverra dignissim.
                 Quisque massa purus, convallis ut ante a, aliquet porttitor felis. Nulla lacinia lorem aliquam, dictum nunc at, egestas nibh. Sed arcu sapien, iaculis sit amet nisi id, accumsan consectetur diam. Maecenas in nisi id sem dignissim ullamcorper et ac ex. Nam placerat elit in felis porttitor mattis. Etiam vel hendrerit mi. Nunc et egestas massa, nec pellentesque orci. Vestibulum vel ante at risus euismod congue. Ut at lorem neque.',
 
-                'image' => 'photos/TM2YL2kXEQj46EDE84Fqi5PAJ0f8YK4vFHuju2Ex.jpg',
+                'image' => 'photos/GoldenRetriever.jpg',
                 'slug' => Str::slug('Post '.($i+2)),
                 'user_id' => "1",
                 'active' => "1",
@@ -61,7 +61,7 @@ class PostSeeder extends Seeder
                 Nullam id nisi tortor. Morbi lectus justo, imperdiet vel ipsum in, volutpat semper nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie pretium metus, id maximus leo gravida vitae. Morbi sollicitudin cursus leo ac mollis. Sed eu lacus tellus. Nam ut erat dapibus, tempor massa lacinia, vestibulum nisi. Nullam nisi massa, eleifend at tortor sit amet, facilisis tincidunt turpis. Etiam pulvinar libero est. Nam ac mi non enim viverra dignissim.
                 Quisque massa purus, convallis ut ante a, aliquet porttitor felis. Nulla lacinia lorem aliquam, dictum nunc at, egestas nibh. Sed arcu sapien, iaculis sit amet nisi id, accumsan consectetur diam. Maecenas in nisi id sem dignissim ullamcorper et ac ex. Nam placerat elit in felis porttitor mattis. Etiam vel hendrerit mi. Nunc et egestas massa, nec pellentesque orci. Vestibulum vel ante at risus euismod congue. Ut at lorem neque.',
 
-                'image' => 'photos/TsWSfnpntfxLQXcNK1v2uctibnTjX4pKBPqiK3lg.jpg',
+                'image' => 'photos/LabradorRetriever.jpg',
                 'slug' => Str::slug('Post '.($i+3)),
                 'user_id' => "1",
                 'active' => "1",

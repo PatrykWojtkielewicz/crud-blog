@@ -23,7 +23,7 @@ use App\Http\Controllers\TagController;
 |
 */
 
-Route::get('/',[HomeController::class,'index'])->name('start');
+Route::get('/',[HomeController::class,'show'])->name('start');
 
 Route::get('/post/{post}',[PostController::class, 'show'])->name('post.show');
 Route::get('/post/{post}#comments',[PostController::class, 'show'])->name('post.show.comment');
