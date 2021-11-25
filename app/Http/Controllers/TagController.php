@@ -47,11 +47,12 @@ class TagController extends Controller
     public function show($tag_name)
     {
         $allposts = Post::all();
-        $posts = array();
+        $posts = [];
         foreach($allposts as $post){
             foreach($post->tag as $tag){
                 if($tag->name == $tag_name){
                     array_push($posts, $post);
+                    break;
                 }
             }
         }
