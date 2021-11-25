@@ -1,6 +1,6 @@
-@extends('home')
+@extends('dashboard')
 
-@section('content')
+@section('dashboard_content')
     <div class="container m-auto">
         <div class="text-center">
             <form action="{{ route('add_post') }}" method="POST" enctype="multipart/form-data">
@@ -39,10 +39,11 @@
                             <div class="mt-1">
                                 <div class="grid grid-cols-2">
                                     <div class="text-center">
-                                        <p class="p-2">Dodaj nowe:</p>
-                                        <input type="text" name="post_new_tag[]" placeholder="Tag 1" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
-                                        <input type="text" name="post_new_tag[]" placeholder="Tag 2" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
-                                        <input type="text" name="post_new_tag[]" placeholder="Tag 3" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                                        <p class="p-2">Dodaj nowe (bez spacji):</p>
+                                        <input type="text" name="post_new_tag[]" pattern="[A-Za-z0-9_-]+" placeholder="Tag 1" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-2"/>
+                                        <input type="text" name="post_new_tag[]" pattern="[A-Za-z0-9_-]+" placeholder="Tag 2" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-2"/>
+                                        <input type="text" name="post_new_tag[]" pattern="[A-Za-z0-9_-]+" placeholder="Tag 3" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-2"/>
+                                        <input type="text" name="post_new_tag[]" pattern="[A-Za-z0-9_-]+" placeholder="Tag 4" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-2"/>
                                     </div>
                                     <div class="text-center">
                                         <p class="p-2">Wcześniej używane:</p>

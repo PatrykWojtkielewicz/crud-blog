@@ -74,7 +74,6 @@ class PostController extends Controller
             'likes' => 0,
             'dislikes' => 0,
         ]);
-        $alltags = array();
         foreach($request->post_new_tag as $new_tag){
             if($new_tag !== null){
                 $tag = Tag::create([
@@ -93,6 +92,6 @@ class PostController extends Controller
                 'tag_id' => $new_tag,
             ]);
         }
-        //return Redirect('/');
+        return Redirect('/');
     }
 }

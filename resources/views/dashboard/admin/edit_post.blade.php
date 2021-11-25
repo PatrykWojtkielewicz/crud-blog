@@ -36,6 +36,42 @@
                             <textarea id="post_content" name="post_content" rows="16" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md">{{ $post->description }}</textarea>
                         </div>
                     </div>
+                    <div>
+                        <label for="about" class="block text-sm font-medium text-gray-700">
+                            Tagi
+                            @foreach ($errors->get('post_tags') as $message)
+                                <span class="text-red-600">{{ $message }}</span>
+                            @endforeach
+                        </label>
+                        <div class="mt-1">
+                            <div class="grid grid-cols-2">
+                                <div class="text-center">
+                                    <p class="p-2">Dodaj nowe (bez spacji):</p>
+                                    <input type="text" name="post_new_tag[]" pattern="[A-Za-z0-9_-]+" placeholder="Tag 1" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-2"/>
+                                    <input type="text" name="post_new_tag[]" pattern="[A-Za-z0-9_-]+" placeholder="Tag 2" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-2"/>
+                                    <input type="text" name="post_new_tag[]" pattern="[A-Za-z0-9_-]+" placeholder="Tag 3" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-2"/>
+                                    <input type="text" name="post_new_tag[]" pattern="[A-Za-z0-9_-]+" placeholder="Tag 4" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-2"/>
+                                </div>
+                                <div class="text-center">
+                                    <p class="p-2">Wcześniej używane:</p>
+                                    <ol>
+                                        @foreach($tags as $tag)
+                                        <li class="p-2 inline-block">
+                                            <label for="{{ $tag->name }}">{{ $tag->name }}</label>
+                                            <input type="checkbox" name="post_tag[]" 
+                                            @foreach ($post->tag as $i)
+                                                @if($i->name == $tag->name)
+                                                    checked
+                                                @endif
+                                            @endforeach
+                                            value="{{ $tag->id }}" id="{{ $tag->name }}"/>
+                                        </li>
+                                    @endforeach
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="flex flex-row">
                         <div class="w-1/2 text-center">
                             <label class="block text-sm font-medium text-gray-700">
@@ -66,7 +102,7 @@
                                     <input type="hidden" class="hidden" name="post_old_image" value="{{ $post->image }}"/>
                             </div>
                                     <label for="old_image">Użyj starego zdjęcia</label>
-                                    <input type="checkbox" name="use_old_image" id="old_image"/>
+                                    <input type="checkbox" name="use_old_image" id="old_image" checked/>
                                 @endif
                         </div>
                     </div>

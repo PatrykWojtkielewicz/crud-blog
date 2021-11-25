@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 use App\Models\Post;
+use App\Models\Tag;
+use App\Models\post_tag;
 
 class PostController extends Controller
 {
@@ -64,7 +66,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('dashboard.admin.edit_post', compact('post'));
+        $tags = Tag::all();
+        return view('dashboard.admin.edit_post', compact('post','tags'));
     }
 
     /**
@@ -96,6 +99,27 @@ class PostController extends Controller
             'likes' => $request->post_likes,
             'dislikes' => $request->post_dislikes,
         ]);
+        foreach($request->post_new_tag as $new_tag){
+            if($new_tag !== null){
+                $tag = Tag::create([
+                    'name' => $new_tag,
+                ]);
+                if(!post_tag::where('post_id', '=', $post->id)->where('tag_id', '=', $tag->id)->exists()){
+                    post_tag::create([
+                        'post_id' => $post->id,
+                        'tag_id' => $tag->id,
+                    ]);
+                }
+            }
+        }
+        foreach($request->post_tag as $new_tag){
+            if(!post_tag::where('post_id', '=', $post->id)->where('tag_id', '=', $new_tag)->exists()){
+                post_tag::create([
+                    'post_id' => $post->id,
+                    'tag_id' => $new_tag,
+                ]);
+            }
+        }
         return Redirect('dashboard/posts');
     }
 

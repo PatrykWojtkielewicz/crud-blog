@@ -14,7 +14,7 @@
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Edytuj Post</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-red-500">Usuń post</th>
             </tr>
-            @foreach ($posts as $post)
+            @foreach ($posts->reverse() as $post)
                 <tr class="border-b-2 @if($post->active == False) bg-gray-200 @endif">
                     <td class="px-6 py-4 whitespace-nowrap">
                         @if(!empty($post->image))

@@ -6,13 +6,13 @@
             <div class="px-4">
                 <div class="sticky top-0 p-4 w-full h-full">
                     <div class="inline-table list-disc">
-                        <li>
+                        <li class="mb-4">
                             <a href="{{ route('new_post') }}" class="no-underline hover:underline p-2">Dodaj Post</a>
                         </li>
-                        <li>
+                        <li class="mb-4">
                             <a href="{{ route('dashboard.posts') }}" class="no-underline hover:underline p-2">Przeglądaj posty</a>
                         </li>
-                        <li>
+                        <li class="mb-4">
                             <a href="{{ route('dashboard.users') }}" class="no-underline hover:underline p-2">Przeglądaj użytkowników</a>
                         </li>
                     </div>
