@@ -58,14 +58,14 @@
                                         @foreach($tags as $tag)
                                         <li class="p-2 inline-block">
                                             <label for="{{ $tag->name }}">{{ $tag->name }}</label>
-                                            <input type="hidden" name="post_tag[{{ $tag->id }}]" class="hidden" value="{{ $tag }}"/>
+                                            <input type="hidden" name="post_tag[{{ $tag->id }}]" class="hidden" value="0"/>
                                             <input type="checkbox" name="post_tag[{{ $tag->id }}]" 
                                             @foreach ($post->tag as $i)
                                                 @if($i->name == $tag->name)
                                                     checked
                                                 @endif
                                             @endforeach
-                                            value="{{ $tag }}" id="{{ $tag->name }}"/>
+                                            value="{{ $tag->id }}" id="{{ $tag->name }}"/>
                                         </li>
                                     @endforeach
                                     </ol>

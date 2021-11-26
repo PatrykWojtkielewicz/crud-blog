@@ -27,38 +27,6 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -88,7 +56,7 @@ class PostController extends Controller
         else{
             $path = "";
         }
-
+        
         Post::where('id', '=', $request->post_id)->update([
             'title' => $request->post_title,
             'description' => $request->post_content,
@@ -99,25 +67,27 @@ class PostController extends Controller
             'likes' => $request->post_likes,
             'dislikes' => $request->post_dislikes,
         ]);
+
+        //operating on new tags
         foreach($request->post_new_tag as $new_tag){
             if($new_tag !== null){
                 $tag = Tag::create([
                     'name' => $new_tag,
                 ]);
                 if(!post_tag::where('post_id', '=', $post->id)->where('tag_id', '=', $tag->id)->exists()){
-                    post_tag::create([
-                        'post_id' => $post->id,
-                        'tag_id' => $tag->id,
-                    ]);
+                    $post->tag()->attach($tag->id);
                 }
             }
         }
-        foreach($request->post_tag as $new_tag){
-            if(!post_tag::where('post_id', '=', $post->id)->where('tag_id', '=', $new_tag)->exists()){
-                post_tag::create([
-                    'post_id' => $post->id,
-                    'tag_id' => $new_tag,
-                ]);
+        //operating on old tags
+        foreach($request->post_tag as $i=>$tag_id){
+            $record = post_tag::where('post_id', '=', $post->id)->where('tag_id', '=', $tag_id);
+            echo $tag_id."=>".$i."<br/>";
+            if($tag_id == 0){
+                $post->tag()->detach($i);
+            }
+            else if(!$record->exists()){
+                $post->tag()->attach($i);
             }
         }
         return Redirect('dashboard/posts');
