@@ -3,7 +3,7 @@
 @section('content')
     <div class="container m-auto">
         <div class="container mx-auto flex flex-wrap flex justify-center items-center">
-            <div class="w-3/5">
+            <div class="lg:w-3/5">
                 <!-- Shows post content -->
                 @if(!empty($post->image))
                     <img class="mx-auto w-full" src="{{ asset('storage/'.$post->image) }}"/>
@@ -18,7 +18,7 @@
                         </a>
                     @endforeach
                 </div>
-                <p class="text-xl">@php echo ($post->description); @endphp</p>
+                <p class="text-xl p-2 leading-relaxed">@php echo ($post->description); @endphp</p>
                 <div class="flex flex-row justify-between">
                     <div class="flex flex-row justify-between">
                         <form action="{{ url('like/'.$post->id) }}" method="POST" class="p-4" id="likeform">

@@ -24,7 +24,7 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'post_title' => 'required|min:3|max:255',
+            'post_title' => 'required|min:3|max:255|unique:posts,title',
             'post_content' => 'required|min:3',
             'post_image' => 'image|mimes:jpeg,png,jpg',
         ];
@@ -37,9 +37,10 @@ class PostRequest extends FormRequest
     public function messages()
     {
         return [
-            'post_title.required' => 'Tytuł posta jest wymagany!',
+            'post_title.required' => 'Tytuł posta jest wymagany',
             'post_title.min' => 'Tytuł posta jest za krótki',
             'post_title.max' => 'Tytuł posta jest za długi',
+            'post_title.unique' => 'Podany tytuł już istnieje w bazie danych',
             'post_content.required' => 'Treść posta jest wymagana!',
             'post_content.min' => 'Post jest za krótki!',
             'post_image.image' => 'Przesłany plik nie jest zdjęciem',

@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->longtext('description');
             $table->string('image')->nullable();
-            $table->string('slug'); // formats title
+            $table->string('slug')->unique(); // formats title
             $table->foreignId('user_id')->constrained();
             $table->boolean('active');
             $table->integer('likes');
