@@ -12,7 +12,7 @@
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuń</th>
             </tr>
             @foreach($users as $user)
-                <tr class="border-b-2">
+                <tr class="border-b-2 @if($user->permission->name == 'admin') bg-indigo-100 @endif">
                     <td class="px-6 py-4 whitespace-nowrap" name="id">{{ $user->id }}<input class="hidden" name="id" value="{{ $user->id }}"/></td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ $user->email }}</td>

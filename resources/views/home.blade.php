@@ -52,6 +52,5 @@
     <footer id="footer" class="w-full z-30 top-0 bg-indigo-900 text-white text-center p-6">
         <p class="inline text-center">Blog &copy2021</p>
     </footer>
-    <script type="text/javascript" src="{{ URL::asset('js/like.js') }}"></script>
 </body>
 </html>
