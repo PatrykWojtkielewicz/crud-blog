@@ -9,9 +9,9 @@
                     <img class="mx-auto w-full" src="{{ asset('storage/'.$post->image) }}"/>
                 @endif
                 <div class="bg-indigo-900 p-4 mb-6 h-full w-full text-white rounded-b-3xl">
-                    <h2 class="text-3xl px-4 text-center">{{ $post->title }}</h2>
+                    <h2 class="text-3xl text-center">{{ $post->title }}</h2>
                 </div>
-                <div class="text-center text-lg text-blue-600 pb-2">
+                <div class="text-center text-xl text-blue-600 p-4">
                     @foreach($post->tag as $tag)
                         <a href="/tags/{{$tag->name}}">
                             #{{ $tag->name }}
@@ -48,13 +48,13 @@
                         </form>
                     </div>
                     <div class="">
-                        <p class="text-gray-900 capitalize">{{ $post->user->name }},&nbsp;</p>
+                        <p class="text-gray-900 capitalize text-right">{{ $post->user->name }}</p>
                         <p class="text-gray-600">{{ date('d-m-Y', strtotime($post->created_at)) }}</p>
                     </div>
                 </div>
                 <!-- Comment section -->
                 <div class="container p-4 mt-8 bg-gray-100 rounded-t-3xl" id="comments">
-                    <p class="text-xl text-center rounded-t-3xl bg-gray-200 p-4 shadow-lg">
+                    <p class="text-xl text-center text-white rounded-t-3xl bg-indigo-900 p-4 shadow-lg">
                         Komentarze
                         @if(!Auth::check())
                             (<a href="{{ route('login') }}" class="underline">Zaloguj się</a> aby dodać komentarz)

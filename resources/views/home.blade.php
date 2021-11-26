@@ -28,7 +28,7 @@
     <nav id="header" class="w-full z-30 top-0 bg-indigo-900 text-white p-4">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
             <p class="text-left">
-                <a href="{{ route('start') }}" class="no-underline hover:underline p-4" >Strona Główna</a>
+                <a href="{{ route('start') }}" class="p-4" ><i class="fas fa-home fa-2x"></i></a>
             </p>
             <p class="text-right">
                 @auth
